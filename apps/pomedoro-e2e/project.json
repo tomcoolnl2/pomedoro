@@ -1,0 +1,10 @@
+{
+  "name": "pomedoro-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/pomedoro-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["pomedoro"],
+  "// targets": "to see all targets run: nx show project pomedoro-e2e --web",
+  "targets": {}
+}
