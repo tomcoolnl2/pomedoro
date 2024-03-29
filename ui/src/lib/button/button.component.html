@@ -1,0 +1,14 @@
+<button
+    class="btn"
+    [ngClass]="{
+        'btn-small': size === 'small',
+        'btn-medium': size === 'medium',
+        'btn-large': size === 'large',
+        'btn-primary': style === 'primary',
+        'btn-secondary': style === 'secondary',
+        'btn-default': style === 'default'
+    }"
+    [title]="tooltip"
+>
+    {{ label }}
+</button>
