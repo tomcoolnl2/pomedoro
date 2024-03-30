@@ -15,6 +15,7 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
+			"@ng-pomedoro/model": ["model/src/index.ts"],
 			"@ng-pomedoro/ui": ["ui/src/index.ts"]
 		}
 	},
