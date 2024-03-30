@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -12,6 +13,7 @@ import { HomePageComponent } from './pages/home/home.component';
 	declarations: [AppComponent, HomePageComponent],
 	imports: [
 		BrowserModule,
+		HttpClientModule,
 		CommonModule,
 		RouterModule.forRoot(appRoutes),
 		UiModule,
