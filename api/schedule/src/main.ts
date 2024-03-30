@@ -11,7 +11,7 @@ function setupOpenApi(app: INestApplication) {
 		.addTag('api')
 		.build();
 	const document = SwaggerModule.createDocument(app, config);
-	SwaggerModule.setup('api', app, document);
+	SwaggerModule.setup('docs', app, document);
 }
 
 async function bootstrap() {
