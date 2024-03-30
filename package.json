@@ -3,6 +3,7 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"scripts": {
+		"test": "nx test pomedoro",
 		"format": "prettier --write './**/*.{js,jsx,ts,tsx,html,css,scss,json,md}'"
 	},
 	"private": true,

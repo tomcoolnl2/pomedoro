@@ -19,6 +19,11 @@ Run `npx nx run ui:storybook` to start a Storybook development server and explor
 Run `npx nx build pomedoro` to build the application. The build artifacts are stored in the output directory `dist/`, ready to be deployed.
 
 
+## Test
+
+Run `npm test` to run all tests for the monorepo. 
+This is the command used by CI/CD in the Github Actions.
+
 ## Project graph
 
 Run `npx nx graph` to show the graph of the workspace.
