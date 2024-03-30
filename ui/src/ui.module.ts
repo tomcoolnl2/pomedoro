@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent } from './lib/lib/button/button.component';
-import { HeaderComponent } from './lib/lib/header/header.component';
+import { ButtonComponent } from './button/button.component';
+import { GridComponent } from './grid/grid.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-	declarations: [ButtonComponent, HeaderComponent],
+	declarations: [ButtonComponent, GridComponent, HeaderComponent],
 	imports: [CommonModule],
-	exports: [ButtonComponent, HeaderComponent],
+	exports: [ButtonComponent, GridComponent, HeaderComponent],
 })
 export class UiModule {}

@@ -1,0 +1,38 @@
+<div
+      [ngStyle]="getStyles()"
+      [ngClass]="{
+        'container': true,
+        'cols-1': cols === 1,
+        'cols-2': cols === 2,
+        'cols-3': cols === 3,
+        'cols-4': cols === 4,
+        'cols-5': cols === 5,
+        'cols-6': cols === 6,
+        'cols-7': cols === 7,
+        'cols-8': cols === 8,
+        'cols-9': cols === 9,
+        'cols-10': cols === 10,
+        'rows-1': rows === 1,
+        'rows-2': rows === 2,
+        'rows-3': rows === 3,
+        'rows-4': rows === 4,
+        'rows-5': rows === 5,
+        'rows-6': rows === 6,
+        'rows-7': rows === 7,
+        'rows-8': rows === 8,
+        'rows-9': rows === 9,
+        'rows-10': rows === 10,
+        'col-gap-xs': colGap === 'xs',
+        'col-gap-s': colGap === 's',
+        'col-gap-m': colGap === 'm',
+        'row-gap-xs': rowGap === 'xs',
+        'row-gap-s': rowGap === 's',
+        'row-gap-m': rowGap === 'm',
+        'padding-xs': padding === 'xs',
+        'padding-s': padding === 's',
+        'padding-m': padding === 'm'
+      }"
+      [class]="className"
+    >
+        <ng-content></ng-content>
+</div>
