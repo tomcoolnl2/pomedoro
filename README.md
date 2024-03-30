@@ -24,6 +24,8 @@ Run `npx nx build pomedoro` to build the application. The build artifacts are st
 Run `npm test` to run all tests for the monorepo. 
 This is the command used by CI/CD in the Github Actions.
 
+Run `npm run test:watch` to run tests in watch mode.
+
 ## Project graph
 
 Run `npx nx graph` to show the graph of the workspace.
