@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"scripts": {
-		"test": "nx test pomedoro && nx test api && nx test ui",
+		"test": "nx test pomedoro && nx test schedule && nx test ui",
 		"test:watch": "nx test pomedoro --watch",
 		"format": "prettier --write './**/*.{js,jsx,ts,tsx,html,css,scss,json,md}'"
 	},
