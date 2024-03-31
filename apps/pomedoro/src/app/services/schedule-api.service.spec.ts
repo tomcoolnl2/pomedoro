@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
-import { ApiService } from './api.service';
+import { ScheduleApiService } from './schedule-api.service';
 
-describe('ApiService', () => {
-	let service: ApiService;
+describe('ScheduleApiService', () => {
+	let service: ScheduleApiService;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			imports: [HttpClientModule],
 		});
-		service = TestBed.inject(ApiService);
+		service = TestBed.inject(ScheduleApiService);
 	});
 
 	it('should be created', () => {
