@@ -4,7 +4,6 @@ import { LoadingIndicatorService } from './loading.service';
 @Component({
 	selector: 'ui-loading-indicator',
 	templateUrl: './loading-indicator.component.html',
-	styleUrl: './loading-indicator.component.css',
 })
 export class LoadingIndicatorComponent {
 	//

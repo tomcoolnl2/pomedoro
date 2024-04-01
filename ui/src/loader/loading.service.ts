@@ -17,17 +17,17 @@ export class LoadingIndicatorService {
 		observable$: Observable<T>
 	): Observable<T> {
 		return of(null).pipe(
-			tap(() => this.loadingOn()),
+			tap(() => this.show()),
 			concatMap(() => observable$),
-			finalize(() => this.loadingOff())
+			finalize(() => this.hide())
 		);
 	}
 
-	public loadingOn() {
+	public show() {
 		this.loadingSubject.next(true);
 	}
 
-	public loadingOff() {
+	public hide() {
 		this.loadingSubject.next(false);
 	}
 }

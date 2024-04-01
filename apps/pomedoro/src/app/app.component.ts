@@ -25,20 +25,17 @@ export class AppComponent implements OnInit {
 	advancedCourses$ = new BehaviorSubject<Course[] | null>(null);
 
 	ngOnInit() {
-		this.subscribeToBeginnerCoursesChanges();
-		this.subscribeToAdvancedCoursesChanges();
-
 		this.subscribeToDataChanges();
 		this.fetchCourses();
 	}
 
 	fetchCourses() {
-		// Show loading indicator
-		this.loadingIndicatorService.loadingOn();
+		//
+		this.loadingIndicatorService.show();
 
 		this.scheduleApiService
 			.fetchCourses()
-			.pipe(finalize(() => this.loadingIndicatorService.loadingOff()))
+			// .pipe(finalize(() => this.loadingIndicatorService.hide()))
 			.subscribe({
 				next: (data) => {
 					this.courses$.next(data);
@@ -63,18 +60,6 @@ export class AppComponent implements OnInit {
 					console.log('Data has changed:', data);
 				}
 			},
-		});
-	}
-
-	subscribeToBeginnerCoursesChanges() {
-		this.beginnerCourses$.subscribe({
-			next: (data) => console.log('BEGINNER', data),
-		});
-	}
-
-	subscribeToAdvancedCoursesChanges() {
-		this.advancedCourses$.subscribe({
-			next: (data) => console.log('ADVANCED', data),
 		});
 	}
 }
