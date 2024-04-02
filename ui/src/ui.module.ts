@@ -6,6 +6,7 @@ import { GridComponent } from './grid/grid.component';
 import { GridItemComponent } from './grid-item/grid-item.component';
 import { HeaderComponent } from './header/header.component';
 import { LoadingIndicatorComponent } from './loader/loading-indicator.component';
+import { ScheduleIndicatorComponent } from './schedule-indicator/schedule-indicator.component';
 import { SettingsTriggerComponent } from './settings-trigger/settings-trigger.component';
 
 import { LoadingIndicatorService } from './loader/loading-indicator.service';
@@ -18,6 +19,7 @@ const components = [
 	HeaderComponent,
 	LoadingIndicatorComponent,
 	SettingsTriggerComponent,
+	ScheduleIndicatorComponent,
 ];
 
 @NgModule({
