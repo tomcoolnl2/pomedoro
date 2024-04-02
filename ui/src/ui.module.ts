@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtonComponent } from './button/button.component';
 import { GridComponent } from './grid/grid.component';
@@ -24,7 +25,7 @@ const components = [
 
 @NgModule({
 	declarations: components,
-	imports: [CommonModule, FontAwesomeModule],
+	imports: [CommonModule, FormsModule, FontAwesomeModule],
 	exports: components,
 	providers: [LoadingIndicatorService],
 })

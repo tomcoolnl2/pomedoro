@@ -1,0 +1,19 @@
+@tailwind components;
+
+@layer components {
+    .schedule-indicator {
+        @apply block my-10 bg-sky-950 p-1 rounded-2xl;
+    }
+
+    input[type="radio"] {
+        @apply hidden;
+    }
+
+    label {
+        @apply block text-sm cursor-pointer px-4 py-3 w-full rounded-xl;
+    }
+
+    label.active {
+        @apply bg-tomato-500;
+    }
+}

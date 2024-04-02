@@ -3,10 +3,10 @@
 @layer components {
 
     .settings-trigger {
-        @apply text-gray-300 mt-8;
+        @apply mt-8;
     }
 
     .settings-trigger a {
-        @apply hover:text-white;
+        @apply text-gray-300 hover:text-white;
     }
 }
