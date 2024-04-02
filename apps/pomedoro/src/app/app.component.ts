@@ -7,7 +7,6 @@ import { ScheduleApiService } from './services/schedule-api.service';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
 	//
@@ -61,5 +60,9 @@ export class AppComponent implements OnInit {
 				}
 			},
 		});
+	}
+
+	handleOpenSettingsDialog() {
+		alert('TEST');
 	}
 }

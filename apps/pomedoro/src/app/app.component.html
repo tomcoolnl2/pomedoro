@@ -1,15 +1,20 @@
 
-
-<ui-grid [padding]="'s'" [alignItems]="'center'" class="app-layout">
-    <nav>
-        <ul>
-            <li><a routerLink="/">Home</a></li>
-            <li><a routerLink="/timer">Timer</a></li>
-            <li><a routerLink="/settings">Settings</a></li>
-        </ul>
-    </nav>
-    
-    <router-outlet></router-outlet>
-    
-    <ui-loading-indicator></ui-loading-indicator>
+<ui-grid [padding]="'s'" [alignItems]="'center'" [cols]=1 class="app-layout">
+    <ui-grid-item>
+        <ui-header></ui-header>
+    </ui-grid-item>
+    <ui-grid-item>
+        Center
+    </ui-grid-item>
+    <ui-grid-item>
+        <ui-button
+            [size]="'medium'"
+            [style]="'primary'"
+            [label]="'Apply'"
+            [tooltip]="'Apply'"
+        />
+        <ui-settings-trigger [onClick]="handleOpenSettingsDialog" />
+    </ui-grid-item>    
 </ui-grid>
+
+<ui-loading-indicator></ui-loading-indicator>

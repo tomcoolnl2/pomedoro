@@ -1,0 +1,32 @@
+
+@tailwind components;
+
+@layer components {
+    .btn {
+        @apply text-sm px-4 py-1 rounded-2xl shadow transition-colors;
+    }
+
+    .btn-small {
+        @apply text-sm;
+    }
+
+    .btn-medium {
+        @apply text-base;
+    }
+
+    .btn-large {
+        @apply text-lg;
+    }
+
+    .btn-primary {
+        @apply bg-tomato-600 hover:bg-tomato-700 hover:text-white;
+    }
+
+    .btn-secondary {
+        @apply bg-white hover:bg-gray-100 hover:text-indigo-950;
+    }
+
+    .btn-default {
+        @apply btn-primary;
+    }
+}

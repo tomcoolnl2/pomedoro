@@ -2,7 +2,7 @@
 @tailwind components;
 
 @layer components {
-    .container {
+    .grid-container {
         display: grid;
     }
     

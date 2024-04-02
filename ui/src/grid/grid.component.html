@@ -1,7 +1,7 @@
 <div
       [ngStyle]="getStyles()"
       [ngClass]="{
-        'container': true,
+        'grid-container': true,
         'cols-1': cols === 1,
         'cols-2': cols === 2,
         'cols-3': cols === 3,
@@ -32,6 +32,7 @@
         'padding-s': padding === 's',
         'padding-m': padding === 'm'
       }"
+      [class]="className"
     >
         <ng-content></ng-content>
 </div>

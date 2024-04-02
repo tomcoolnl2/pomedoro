@@ -4,6 +4,12 @@
 
 @layer base {
     body {
-        @apply text-tomato-500;
+        @apply bg-indigo-950 text-gray-200 text-center;
+    }
+}
+
+@layer components {
+    .app-layout {
+        @apply block mt-5 max-w-72 mx-auto;
     }
 }

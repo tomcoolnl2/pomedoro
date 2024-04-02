@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
 	selector: 'ui-grid',
 	templateUrl: './grid.component.html',
-	styleUrl: './grid.component.html',
+	styleUrl: './grid.component.css',
 })
 export class GridComponent {
 	//

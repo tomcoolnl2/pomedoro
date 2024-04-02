@@ -1,0 +1,12 @@
+@tailwind components;
+
+@layer components {
+
+    .settings-trigger {
+        @apply text-gray-300 mt-8;
+    }
+
+    .settings-trigger svg {
+        @apply cursor-pointer hover:text-white;
+    }
+}
