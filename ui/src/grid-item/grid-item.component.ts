@@ -11,6 +11,7 @@ export class GridItemComponent {
 	@Input() onClick: ((event: MouseEvent) => void) | undefined;
 
 	getStyle(): { [key: string]: string } {
+		//
 		const style: { [key: string]: string } = {};
 
 		if (this.columnStart) {

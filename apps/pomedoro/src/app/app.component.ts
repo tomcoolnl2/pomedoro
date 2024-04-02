@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
 
 		this.scheduleApiService
 			.fetchCourses()
-			// .pipe(finalize(() => this.loadingIndicatorService.hide()))
+			.pipe(finalize(() => this.loadingIndicatorService.hide()))
 			.subscribe({
 				next: (data) => {
 					this.courses$.next(data);

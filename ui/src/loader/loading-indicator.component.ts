@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { LoadingIndicatorService } from './loading.service';
+import { LoadingIndicatorService } from './loading-indicator.service';
 
 @Component({
 	selector: 'ui-loading-indicator',
 	templateUrl: './loading-indicator.component.html',
+	styleUrl: './loading-indicator.component.css',
 })
 export class LoadingIndicatorComponent {
 	//
