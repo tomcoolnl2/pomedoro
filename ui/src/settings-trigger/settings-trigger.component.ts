@@ -7,10 +7,10 @@ import { faGear } from '@fortawesome/free-solid-svg-icons';
 	styleUrl: './settings-trigger.component.css',
 })
 export class SettingsTriggerComponent {
-	faGear = faGear;
+	public faGear = faGear;
 	@Input() onClick: ((event: MouseEvent) => void) | undefined;
 
-	onClickHandler(event: MouseEvent): void {
+	public onClickHandler(event: MouseEvent): void {
 		event.preventDefault();
 		if (this.onClick) {
 			this.onClick(event);
