@@ -10,6 +10,6 @@
 
 @layer components {
     .app-layout {
-        @apply block max-w-md m-auto bg-gray-900 rounded-xl shadow-xl;
+        @apply block max-w-md my-auto mx-4 bg-gray-900 rounded-xl shadow-xl;
     }
 }

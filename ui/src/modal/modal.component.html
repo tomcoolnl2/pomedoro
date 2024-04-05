@@ -1,0 +1,21 @@
+<div *ngIf="modalService.isVisible$ | async" class="modal-wrapper">
+	<section
+		class="modal"
+		[ngClass]="{ 'animation-fade opacity-0 pointer-events-none': (modalService.isVisible$ | async) === false }">
+			<header class="modal-header">
+				<h1><b>{{ header }}</b></h1>
+				<ui-icon [iconName]="'faClose'" (click)="modalService.close()" class="modal-close" />
+			</header>
+			<hr />
+			<div class="modal-body">
+				<ng-content></ng-content>
+			</div>
+			<ui-button
+				class="modal-cta"
+				[size]="'small'"
+				[style]="'primary'"
+				[label]="'Apply'"
+				(click)="onClickHandler($event)"
+			/>
+	</section>
+</div>

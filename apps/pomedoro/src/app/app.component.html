@@ -7,16 +7,19 @@
         <ui-schedule-indicator />
     </ui-grid-item>
     <ui-grid-item>
-        <ui-button
-            [size]="'medium'"
-            [style]="'primary'"
-            [label]="'Apply'"
-            [tooltip]="'Apply'"
-            [onClick]="handleOpenSettingsDialog"
-        />
-        <ui-icon [iconName]="'faGear'" />
+        <br /><br />
+        TIMER
+        <br /><br />
+    </ui-grid-item>
+    <ui-grid-item>
+        <ui-icon [iconName]="'faGear'" [onClick]="handleOpenSettingsDialog" />
     </ui-grid-item>    
 </ui-grid>
 
+<ui-modal [header]="'Settings'" [onClick]="handleApplySettings">
+    Settings Panel
+</ui-modal>
+
 <ui-notifications />
+
 <ui-loading-indicator />

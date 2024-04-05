@@ -9,10 +9,6 @@ export class LoadingIndicatorService {
 
 	public loading$: Observable<boolean> = this.loadingSubject.asObservable();
 
-	constructor() {
-		console.log('Loading service created ...');
-	}
-
 	public showLoaderUntilCompleted<T>(
 		observable$: Observable<T>
 	): Observable<T> {

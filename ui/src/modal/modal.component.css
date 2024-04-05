@@ -1,0 +1,27 @@
+@tailwind components;
+
+@layer components {
+    .modal-wrapper {
+        @apply fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50;
+    }
+    
+    .modal {
+        @apply relative w-full max-w-lg m-4 rounded-lg aspect-square bg-gray-200;
+    }
+    
+    .modal-header, .modal-body {
+        @apply p-4 text-left text-gray-800;
+    }
+
+    .modal-close {
+        @apply absolute top-0 right-0 m-4;
+    }
+
+    .modal hr {
+        @apply my-0 border-gray-300;
+    }
+
+    .modal-cta {
+        @apply absolute -bottom-4 left-1/2 -translate-x-1/2;
+    }
+}

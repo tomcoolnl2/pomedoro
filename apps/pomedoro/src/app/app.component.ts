@@ -1,7 +1,12 @@
 import { BehaviorSubject, catchError, finalize, throwError } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Course, sortCoursesBySeqNo } from '@ng-pomedoro/model';
-import { LoadingIndicatorService, NotificationsService, NotificationTypeEnum } from '@ng-pomedoro/ui';
+import {
+	LoadingIndicatorService,
+	NotificationsService,
+	NotificationTypeEnum,
+	ModalService,
+} from '@ng-pomedoro/ui';
 import { ScheduleApiService } from './services/schedule-api.service';
 
 @Component({
@@ -15,8 +20,9 @@ export class AppComponent implements OnInit {
 	constructor(
 		private scheduleApiService: ScheduleApiService,
 		private loadingIndicatorService: LoadingIndicatorService,
-		private notificationsService: NotificationsService
-	) { }
+		private notificationsService: NotificationsService,
+		private modalService: ModalService
+	) {}
 
 	courses$ = new BehaviorSubject<Course[] | null>(null);
 
@@ -46,7 +52,7 @@ export class AppComponent implements OnInit {
 					return throwError(() => new Error(error));
 				}),
 				// Hide loading indicator regardless of success or error
-				finalize(() => this.loadingIndicatorService.hide()),
+				finalize(() => this.loadingIndicatorService.hide())
 			)
 			.subscribe({
 				next: (data) => {
@@ -77,19 +83,19 @@ export class AppComponent implements OnInit {
 	}
 
 	handleOpenSettingsDialog = () => {
-		const notification = {
-			message: 'This is a toast message',
-			type: NotificationTypeEnum.Success
-		}
-		this.notificationsService.addNotification(notification);
-	}
+		this.modalService.open();
+	};
+
+	handleApplySettings = () => {
+		this.modalService.close();
+	};
 
 	triggerError = () => {
 		const notification = {
 			message: 'This is a ERROR message',
 			type: NotificationTypeEnum.Error,
-			persistent: true
-		}
+			persistent: true,
+		};
 		this.notificationsService.addNotification(notification);
-	}
+	};
 }

@@ -9,12 +9,14 @@ import { GridItemComponent } from './grid/grid-item.component';
 import { HeaderComponent } from './header/header.component';
 import { IconComponent } from './icon/icon.component';
 import { LoadingIndicatorComponent } from './loader/loading-indicator.component';
-import { ScheduleIndicatorComponent } from './schedule-indicator/schedule-indicator.component';
+import { ModalComponent } from './modal/modal.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { ScheduleIndicatorComponent } from './schedule-indicator/schedule-indicator.component';
 
 import { LoadingIndicatorService } from './loader/loading-indicator.service';
 import { NotificationsService } from './notifications/notifications.service';
 import { NotificationTypeEnum } from './notifications/notifications.model';
+import { ModalService } from './modal/modal.service';
 
 const components = [
 	ButtonComponent,
@@ -23,6 +25,7 @@ const components = [
 	HeaderComponent,
 	IconComponent,
 	LoadingIndicatorComponent,
+	ModalComponent,
 	NotificationsComponent,
 	ScheduleIndicatorComponent,
 ];
@@ -31,8 +34,13 @@ const components = [
 	declarations: components,
 	imports: [CommonModule, FormsModule, FontAwesomeModule],
 	exports: components,
-	providers: [LoadingIndicatorService, NotificationsService],
+	providers: [LoadingIndicatorService, NotificationsService, ModalService],
 })
 export class UiModule {}
 
-export { LoadingIndicatorService, NotificationsService, NotificationTypeEnum };
+export {
+	LoadingIndicatorService,
+	NotificationsService,
+	NotificationTypeEnum,
+	ModalService,
+};
