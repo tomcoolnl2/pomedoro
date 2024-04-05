@@ -1,5 +1,5 @@
 
-<ui-grid [padding]="'s'" [alignItems]="'center'" [cols]=1 class="app-layout">
+<ui-grid [padding]="'m'" [alignItems]="'center'" [cols]=1 class="app-layout">
     <ui-grid-item>
         <ui-header />
     </ui-grid-item>
@@ -12,9 +12,11 @@
             [style]="'primary'"
             [label]="'Apply'"
             [tooltip]="'Apply'"
+            [onClick]="handleOpenSettingsDialog"
         />
-        <ui-settings-trigger [onClick]="handleOpenSettingsDialog" />
+        <ui-icon [iconName]="'faGear'" />
     </ui-grid-item>    
 </ui-grid>
 
+<ui-notifications />
 <ui-loading-indicator />

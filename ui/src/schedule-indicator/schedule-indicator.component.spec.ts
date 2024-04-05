@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { GridComponent } from '../grid/grid.component';
-import { GridItemComponent } from '../grid-item/grid-item.component';
+import { GridItemComponent } from '../grid/grid-item.component';
 import { ScheduleIndicatorComponent } from './schedule-indicator.component';
 
 describe('ScheduleIndicatorComponent', () => {

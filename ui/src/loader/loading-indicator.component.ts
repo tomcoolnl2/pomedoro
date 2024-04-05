@@ -7,6 +7,5 @@ import { LoadingIndicatorService } from './loading-indicator.service';
 	styleUrl: './loading-indicator.component.css',
 })
 export class LoadingIndicatorComponent {
-	//
 	constructor(public loadingIndicatorService: LoadingIndicatorService) {}
 }

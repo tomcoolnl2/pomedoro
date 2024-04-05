@@ -7,8 +7,8 @@ export class AppController {
 	//
 	constructor(private readonly appService: AppService) {}
 
-	@Get('courses')
+	@Get('schedules')
 	getCourses() {
-		return this.appService.getCourses();
+		return this.appService.getSchedules();
 	}
 }

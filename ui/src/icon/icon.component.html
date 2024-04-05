@@ -1,0 +1,11 @@
+
+<ng-container *ngIf="iconName">
+    <ng-container *ngIf="onClickHandler">
+        <a href="#" (click)="onClickHandler($event)">
+            <fa-icon [icon]="faIconName" />
+        </a>
+    </ng-container>
+    <ng-container *ngIf="!onClickHandler">
+        <fa-icon [icon]="faIconName" />
+    </ng-container>    
+</ng-container>

@@ -3,23 +3,23 @@
 
 @layer components {
     .btn {
-        @apply text-sm px-4 py-1 rounded-2xl shadow transition-colors;
+        @apply text-sm px-4 py-3 rounded-lg shadow transition-colors min-w-24;
     }
 
     .btn-small {
-        @apply text-sm;
+        @apply text-xs;
     }
 
     .btn-medium {
-        @apply text-base;
+        @apply text-sm;
     }
 
     .btn-large {
-        @apply text-lg;
+        @apply text-base;
     }
 
     .btn-primary {
-        @apply bg-tomato-600 hover:bg-tomato-700 hover:text-white;
+        @apply bg-tomato-500 hover:bg-tomato-600 hover:text-white;
     }
 
     .btn-secondary {

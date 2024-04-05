@@ -2,7 +2,7 @@
 
 @layer components {
     .schedule-indicator {
-        @apply block my-10 bg-sky-950 p-1 rounded-2xl;
+        @apply block my-10 bg-gray-950 p-1 rounded-xl shadow-md;
     }
 
     input[type="radio"] {
@@ -10,7 +10,7 @@
     }
 
     label {
-        @apply block text-sm cursor-pointer px-4 py-3 w-full rounded-xl;
+        @apply block text-sm cursor-pointer px-4 py-3 w-full rounded-lg;
     }
 
     label.active {

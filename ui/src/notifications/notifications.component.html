@@ -1,0 +1,21 @@
+<div *ngIf="notifications.length > 0" class="fixed top-0 left-0 m-4 z-50">
+    <ng-container *ngFor="let notification of notifications">
+        <div 
+            [ngClass]="{
+                'bg-red-500': notification.type === 'error',
+                'bg-yellow-500': notification.type === 'warning',
+                'bg-blue-500': notification.type === 'info',
+                'bg-green-500': notification.type === 'success'
+            }" 
+            class="text-white rounded-md p-4 mb-2 shadow-md"
+            [id]="notification.id || ''"
+        >
+        {{ notification.message }} {{ notification.id }}
+        <ng-container *ngIf="notification.dismissable && notification.id">
+            <a href="#" (click)="removeNotification(notification.id)">
+                <fa-icon [icon]="faClose" />
+            </a>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>

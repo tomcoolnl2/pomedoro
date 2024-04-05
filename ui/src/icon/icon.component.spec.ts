@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { SettingsTriggerComponent } from './settings-trigger.component';
+import { IconComponent } from './icon.component';
 
 describe('SettingsTriggerComponent', () => {
-	let component: SettingsTriggerComponent;
-	let fixture: ComponentFixture<SettingsTriggerComponent>;
+	let component: IconComponent;
+	let fixture: ComponentFixture<IconComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [SettingsTriggerComponent],
+			declarations: [IconComponent],
 			imports: [FontAwesomeModule],
 		}).compileComponents();
 
-		fixture = TestBed.createComponent(SettingsTriggerComponent);
+		fixture = TestBed.createComponent(IconComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});

@@ -9,6 +9,7 @@
         'btn-default': style === 'default'
     }"
     [title]="tooltip"
+    (click)="onClickHandler($event)"
 >
     {{ label }}
 </button>

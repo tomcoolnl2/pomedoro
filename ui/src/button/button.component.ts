@@ -10,4 +10,11 @@ export class ButtonComponent {
 	@Input() style: 'primary' | 'secondary' | 'default' = 'default';
 	@Input() label = 'Button';
 	@Input() tooltip = '';
+	@Input() onClick: ((event: MouseEvent) => void) | undefined;
+
+	onClickHandler(event: MouseEvent): void {
+		if (this.onClick) {
+			this.onClick(event);
+		}
+	}
 }

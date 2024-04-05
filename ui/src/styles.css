@@ -4,12 +4,12 @@
 
 @layer base {
     body {
-        @apply bg-sky-900 text-gray-200 text-center;
+        @apply grid items-center bg-gray-800 text-gray-200 text-center h-screen;
     }
 }
 
 @layer components {
     .app-layout {
-        @apply block my-5 max-w-96 mx-auto;
+        @apply block max-w-md m-auto bg-gray-900 rounded-xl shadow-xl;
     }
 }

@@ -5,7 +5,7 @@ import { COURSES } from '../assets/db-data';
 @Injectable()
 export class AppService {
 	//
-	getCourses(): { payload: Course[] } {
+	getSchedules(): { payload: Course[] } {
 		return { payload: Object.values(COURSES) };
 	}
 }

@@ -12,9 +12,9 @@ export class ScheduleApiService {
 
 	constructor(private http: HttpClient) {}
 
-	fetchCourses(): Observable<Course[]> {
+	fetchSchedules(): Observable<Course[]> {
 		return this.http
-			.get<{ payload: Course[] }>(`${this.baseUrl}/courses`)
+			.get<{ payload: Course[] }>(`${this.baseUrl}/schedules`)
 			.pipe(
 				map((res) => res.payload),
 				shareReplay()
