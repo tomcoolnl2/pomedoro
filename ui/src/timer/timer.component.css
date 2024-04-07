@@ -1,0 +1,19 @@
+@tailwind components;
+
+@layer components {
+    .timer {
+        @apply relative bg-black rounded-full shadow-lg p-4;
+    }
+
+    .timer circle {
+        stroke-dasharray: 113px;stroke-dashoffset: 0px;
+        stroke-linecap: round;
+        stroke-width: 2px;
+        stroke: white;
+        fill: none;
+    }
+
+    .timer time {
+        @apply text-2xl;
+    }
+}

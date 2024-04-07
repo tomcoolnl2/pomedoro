@@ -12,29 +12,49 @@ import { LoadingIndicatorComponent } from './loader/loading-indicator.component'
 import { ModalComponent } from './modal/modal.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { ScheduleIndicatorComponent } from './schedule-indicator/schedule-indicator.component';
+import { TimerComponent } from './timer/timer.component';
+import { TimerControlsComponent } from './timer-controls/timer-controls.component';
 
 import { LoadingIndicatorService } from './loader/loading-indicator.service';
 import { NotificationsService } from './notifications/notifications.service';
 import { NotificationTypeEnum } from './notifications/notifications.model';
 import { ModalService } from './modal/modal.service';
-
-const components = [
-	ButtonComponent,
-	GridComponent,
-	GridItemComponent,
-	HeaderComponent,
-	IconComponent,
-	LoadingIndicatorComponent,
-	ModalComponent,
-	NotificationsComponent,
-	ScheduleIndicatorComponent,
-];
+import { TimerService } from './timer/timer.service';
 
 @NgModule({
-	declarations: components,
+	declarations: [
+		ButtonComponent,
+		GridComponent,
+		GridItemComponent,
+		HeaderComponent,
+		IconComponent,
+		LoadingIndicatorComponent,
+		ModalComponent,
+		NotificationsComponent,
+		ScheduleIndicatorComponent,
+		TimerComponent,
+		TimerControlsComponent,
+	],
 	imports: [CommonModule, FormsModule, FontAwesomeModule],
-	exports: components,
-	providers: [LoadingIndicatorService, NotificationsService, ModalService],
+	exports: [
+		ButtonComponent,
+		GridComponent,
+		GridItemComponent,
+		HeaderComponent,
+		IconComponent,
+		LoadingIndicatorComponent,
+		ModalComponent,
+		NotificationsComponent,
+		ScheduleIndicatorComponent,
+		TimerComponent,
+		TimerControlsComponent,
+	],
+	providers: [
+		LoadingIndicatorService,
+		NotificationsService,
+		ModalService,
+		TimerService,
+	],
 })
 export class UiModule {}
 
@@ -43,4 +63,5 @@ export {
 	NotificationsService,
 	NotificationTypeEnum,
 	ModalService,
+	TimerService,
 };
