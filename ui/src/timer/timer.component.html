@@ -3,4 +3,6 @@
         <circle r="100" cx="50%" cy="50%" />
     </svg> -->
     <time>{{ formatTime(timeLeft) }}</time>
+    <br /><br />
+    <ui-timer-controls (buttonClicked)="togglePlayPause($event)" />
 </div>

@@ -29,6 +29,8 @@ export class TimerService implements OnDestroy {
 				const remainingTime = this.timeLeft$.value;
 				if (remainingTime > 0) {
 					this.timeLeft$.next(remainingTime - 1);
+				} else {
+					this.destroy$.next();
 				}
 			});
 	}
@@ -44,9 +46,5 @@ export class TimerService implements OnDestroy {
 
 	pause(): void {
 		this.paused$.next(true);
-	}
-
-	reset(): void {
-		// this.setTime(this.initialTime);
 	}
 }

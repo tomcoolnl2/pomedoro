@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 })
 export class TimerComponent implements OnDestroy {
 	//
-	@Input() initialTime = 180;
+	@Input() initialTime = 15;
 	timeLeft = 0;
 	private timeLeftSubscription: Subscription;
 
@@ -30,6 +30,11 @@ export class TimerComponent implements OnDestroy {
 
 	setTime(timeInSeconds: number): void {
 		this.timerService.setTime(timeInSeconds);
+	}
+
+	togglePlayPause(checked: boolean): void {
+		console.log('TimerComponent', checked);
+		checked ? this.timerService.pause() : this.timerService.play();
 	}
 
 	play(): void {
