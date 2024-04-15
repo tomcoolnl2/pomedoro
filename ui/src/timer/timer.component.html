@@ -2,7 +2,16 @@
     <!-- <svg>
         <circle r="100" cx="50%" cy="50%" />
     </svg> -->
-    <time>{{ formatTime(timeLeft) }}</time>
+    <time>{{ formatTime() }}</time>
     <br /><br />
-    <ui-timer-controls (buttonClicked)="togglePlayPause($event)" />
+
+    <button (click)="toggleTimer()">
+        {{ isPaused ? 'Play' : 'Pause' }}
+    </button>
+
+    <label class="play-button" for="play-button">
+        <input type="checkbox" id="play-button" (change)="toggleTimer()">
+        <span></span>
+        <span></span>
+    </label>
 </div>

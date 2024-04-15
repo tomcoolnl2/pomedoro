@@ -1,6 +1,6 @@
-import { Component, Input, OnDestroy } from '@angular/core';
-import { TimerService } from './timer.service';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy } from '@angular/core';
+import { interval, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
 	selector: 'ui-timer',
@@ -9,53 +9,55 @@ import { Subscription } from 'rxjs';
 })
 export class TimerComponent implements OnDestroy {
 	//
-	@Input() initialTime = 15;
-	timeLeft = 0;
-	private timeLeftSubscription: Subscription;
+	timer = 60; // Initial countdown time in seconds
+	isPaused = false;
+	private destroy$ = new Subject<void>();
 
-	constructor(private timerService: TimerService) {
-		this.timeLeftSubscription = this.timerService.timeLeft$.subscribe(
-			(time) => {
-				console.log(time);
-				this.timeLeft = time;
-			}
-		);
-
-		this.reset().start();
+	constructor() {
+		this.startTimer();
 	}
 
-	ngOnDestroy(): void {
-		this.timeLeftSubscription.unsubscribe();
+	startTimer() {
+		interval(1000)
+			.pipe(takeUntil(this.destroy$))
+			.subscribe(() => {
+				if (this.timer > 0) {
+					this.timer--;
+				} else {
+					this.pauseTimer();
+				}
+			});
 	}
 
-	setTime(timeInSeconds: number): void {
-		this.timerService.setTime(timeInSeconds);
+	pauseTimer() {
+		this.destroy$.next();
 	}
 
-	togglePlayPause(checked: boolean): void {
-		console.log('TimerComponent', checked);
-		checked ? this.timerService.pause() : this.timerService.play();
+	continueTimer() {
+		this.startTimer();
 	}
 
-	play(): void {
-		this.timerService.play();
+	toggleTimer() {
+		this.isPaused = !this.isPaused;
+		if (this.isPaused) {
+			this.pauseTimer();
+		} else {
+			this.startTimer();
+		}
 	}
 
-	pause(): void {
-		this.timerService.pause();
-	}
-
-	reset(): TimerService {
-		return this.timerService.setTime(this.initialTime);
-	}
-
-	formatTime(timeInSeconds: number): string {
-		const minutes = (timeInSeconds / 60) << 0;
-		const seconds = timeInSeconds % 60;
+	formatTime(): string {
+		const minutes = (this.timer / 60) << 0;
+		const seconds = this.timer % 60;
 		return `${this.pad(minutes)}:${this.pad(seconds)}`;
 	}
 
 	private pad(value: number): string {
 		return value < 10 ? '0' + value : value.toString();
+	}
+
+	ngOnDestroy() {
+		this.destroy$.next();
+		this.destroy$.complete();
 	}
 }
