@@ -6,7 +6,8 @@
     }
 
     .timer circle {
-        stroke-dasharray: 113px;stroke-dashoffset: 0px;
+        stroke-dasharray: 113px;
+        stroke-dashoffset: 0px;
         stroke-linecap: round;
         stroke-width: 2px;
         stroke: white;
