@@ -2,18 +2,21 @@
 
 @layer components {
     .timer {
-        @apply block m-auto mb-4 bg-black rounded-full shadow-lg p-4 aspect-square w-9/12;
+        @apply relative block m-auto mb-4 bg-black rounded-full shadow-lg aspect-square w-9/12;
         align-content: space-evenly;
     }
 
-    /* .timer circle {
-        stroke-dasharray: 113px;
-        stroke-dashoffset: 0px;
-        stroke-linecap: round;
-        stroke-width: 2px;
-        stroke: white;
-        fill: none;
-    } */
+    .timer .clock {
+        @apply absolute inset-0;
+    }
+    
+    .timer .clock circle {
+        @apply fill-none stroke-tomato-500;
+    }
+
+    .timer-control-wrapper {
+        @apply relative;
+    }
 
     .timer time {
         @apply text-6xl text-white font-bold;
@@ -22,5 +25,4 @@
     .timer .timer-control {
         @apply text-4xl;
     }
-    
 }
