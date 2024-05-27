@@ -6,9 +6,9 @@ import { Course } from '@ng-pomedoro/model';
 @Injectable({
 	providedIn: 'root',
 })
-export class ScheduleApiService {
+export class SchedulesService {
 	//
-	private baseUrl = 'http://localhost:3000/api';
+	private baseUrl = 'http://localhost:3000/api'; // TODO: env variable
 
 	constructor(private http: HttpClient) {}
 
