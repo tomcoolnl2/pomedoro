@@ -1,4 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { GridComponent } from '../grid/grid.component';
+import { GridItemComponent } from '../grid/grid-item.component';
+import { IconComponent } from '../icon/icon.component';
 import { TimerComponent } from './timer.component';
 
 describe('TimerComponent', () => {
@@ -7,7 +11,13 @@ describe('TimerComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [TimerComponent],
+			declarations: [
+				GridComponent,
+				GridItemComponent,
+				IconComponent,
+				TimerComponent,
+			],
+			imports: [FontAwesomeModule],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(TimerComponent);

@@ -33,10 +33,6 @@ export class TimerComponent implements OnDestroy {
 		this.destroy$.next();
 	}
 
-	continueTimer() {
-		this.startTimer();
-	}
-
 	toggleTimer() {
 		this.isPaused = !this.isPaused;
 		if (this.isPaused) {

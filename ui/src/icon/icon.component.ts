@@ -3,6 +3,8 @@ import {
 	IconDefinition,
 	faClose,
 	faGear,
+	faPlay,
+	faPause,
 	faQuestion,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,6 +20,8 @@ export class IconComponent {
 
 	faClose = faClose;
 	faGear = faGear;
+	faPlay = faPlay;
+	faPause = faPause;
 
 	get faIconName(): IconDefinition {
 		switch (this.iconName) {
@@ -25,6 +29,10 @@ export class IconComponent {
 				return faClose;
 			case 'faGear':
 				return faGear;
+			case 'faPlay':
+				return faPlay;
+			case 'faPause':
+				return faPause;
 			default:
 				return faQuestion;
 		}
