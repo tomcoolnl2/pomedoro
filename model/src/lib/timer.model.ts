@@ -5,7 +5,7 @@ export enum TimerMode {
 }
 
 export enum TimerStatus {
-	Started = 'Started',
+	Initial = 'Initial',
 	Running = 'Running',
 	Paused = 'Paused',
 	Complete = 'Complete',

@@ -1,6 +1,6 @@
-import { interval, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { TimerStatus } from '@ng-pomedoro/model';
 import { SharedStateFacade } from '@ng-pomedoro/state';
 
@@ -11,77 +11,65 @@ import { SharedStateFacade } from '@ng-pomedoro/state';
 })
 export class TimerComponent implements OnInit, OnDestroy {
 	//
-	@Input() time!: number; // TODO: PomodoroSchedule
-	duration!: number;
+	@Input() time!: number;
 	circumference = 2 * Math.PI * 90;
 	dashOffset = 0;
 	progress = 100;
 	timerStatus!: TimerStatus;
-	TimerStatus = TimerStatus;
+	formattedDuration!: string;
+	iconName: 'faPlay' | 'faPause' = 'faPlay';
 
 	private destroy$ = new Subject<void>();
 
-	constructor(private sharedStateFacade: SharedStateFacade) {}
+	constructor(private sharedStateFacade: SharedStateFacade) {
+		this.formattedDuration = this.formatTime(this.time);
+	}
 
 	ngOnInit(): void {
+		//
+		this.sharedStateFacade.setTimerDuration(this.time);
+
 		this.sharedStateFacade
-			.setTimerDuration(this.time)
-			.subscribe((duration) => {
-				this.duration = duration;
-				this.updateCircle();
-			});
-
-		this.sharedStateFacade.startTimer().subscribe((timerStatus) => {
-			this.timerStatus = timerStatus;
-			this.handleTimerStatusChange(timerStatus);
-		});
-	}
-
-	handleTimerStatusChange(timerStatus: TimerStatus) {
-		switch (timerStatus) {
-			case TimerStatus.Started:
-			case TimerStatus.Running:
-				this.startTimer();
-				break;
-			case TimerStatus.Paused:
-				this.pauseTimer();
-				break;
-		}
-	}
-
-	startTimer() {
-		interval(1000)
+			.selectTimerStatus()
 			.pipe(takeUntil(this.destroy$))
-			.subscribe(() => {
-				if (this.time > 0) {
-					this.time--;
-					this.updateCircle();
-				} else {
-					this.sharedStateFacade.pauseTimer();
-				}
+			.subscribe((status) => {
+				this.timerStatus = status;
 			});
-	}
 
-	pauseTimer() {
-		this.destroy$.next();
+		this.sharedStateFacade
+			.selectRemainingTime()
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((remainingTime) => {
+				this.updateCircle(remainingTime);
+				this.formattedDuration = this.formatTime(remainingTime);
+			});
+
+		this.sharedStateFacade
+			.isTimerActive()
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((active) => {
+				this.iconName = active ? 'faPause' : 'faPlay';
+			});
 	}
 
 	toggleTimer() {
-		if (this.timerStatus === TimerStatus.Paused) {
+		if (this.timerStatus === TimerStatus.Initial) {
+			this.sharedStateFacade.startTimer();
+		} else if (this.timerStatus === TimerStatus.Paused) {
 			this.sharedStateFacade.resumeTimer();
 		} else {
 			this.sharedStateFacade.pauseTimer();
 		}
 	}
 
-	updateCircle(): void {
-		this.progress = (this.time / this.duration) * 100;
-		this.dashOffset = this.circumference * (1 - this.time / this.duration);
+	updateCircle(remainingTime: number): void {
+		this.progress = (remainingTime / this.time) * 100;
+		this.dashOffset = this.circumference * (1 - remainingTime / this.time);
 	}
 
-	formatTime(): string {
-		const minutes = (this.time / 60) << 0;
-		const seconds = this.time % 60;
+	formatTime(time: number): string {
+		const minutes = (time / 60) << 0;
+		const seconds = time % 60;
 		return `${this.pad(minutes)}:${this.pad(seconds)}`;
 	}
 

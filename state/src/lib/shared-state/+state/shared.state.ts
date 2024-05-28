@@ -32,7 +32,7 @@ export interface SharedState {
 export const initialState: SharedState = {
 	duration: 0,
 	currentTimerMode: TimerMode.Pomodoro,
-	timerStatus: TimerStatus.Started,
+	timerStatus: TimerStatus.Initial,
 	progress: 0,
 	remainingTime: 0,
 	currentSession: 0,

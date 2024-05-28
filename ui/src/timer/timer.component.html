@@ -6,18 +6,17 @@
             [attr.stroke-dashoffset]="dashOffset"
             transform="rotate(-90 100 100)"
             stroke-width="6"
-            stroke-linecap="round"
-            [ngClass]="progress <= 0 ? 'done' : ''" />
+            stroke-linecap="round" />
     </svg>
     <ui-grid rowGap="m" [alignItems]="'center'" class="timer-control-wrapper">
         <ui-grid-item>
-            <time>{{ formatTime() }}</time>
+            <time>{{formattedDuration}}</time>
         </ui-grid-item>
         <ui-grid-item>
             <ui-grid-item>
                 <ui-icon 
                     class="timer-control" 
-                    [iconName]="timerStatus === TimerStatus.Paused ? 'faPlay' : 'faPause'"  
+                    [iconName]="iconName"  
                     (click)="toggleTimer()" />
             </ui-grid-item>
         </ui-grid-item>
