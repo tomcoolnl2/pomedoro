@@ -1,13 +1,13 @@
 import { BehaviorSubject, catchError, finalize, throwError } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { Course, sortCoursesBySeqNo } from '@ng-pomedoro/model';
+import { PomodoroSchedule } from '@ng-pomedoro/model';
 import {
 	LoadingIndicatorService,
 	NotificationsService,
 	NotificationTypeEnum,
 	ModalService,
 } from '@ng-pomedoro/ui';
-import { ScheduleApiService } from './services/schedule-api.service';
+import { SharedStateFacade } from '@ng-pomedoro/state';
 
 @Component({
 	selector: 'app-root',
@@ -17,18 +17,14 @@ export class AppComponent implements OnInit {
 	//
 	public readonly title = 'Pomedoro';
 
+	schedules$ = new BehaviorSubject<PomodoroSchedule[] | null>(null);
+
 	constructor(
-		private scheduleApiService: ScheduleApiService,
+		private sharedStateFacade: SharedStateFacade,
 		private loadingIndicatorService: LoadingIndicatorService,
 		private notificationsService: NotificationsService,
 		private modalService: ModalService
 	) {}
-
-	courses$ = new BehaviorSubject<Course[] | null>(null);
-
-	beginnerCourses$ = new BehaviorSubject<Course[] | null>(null);
-
-	advancedCourses$ = new BehaviorSubject<Course[] | null>(null);
 
 	ngOnInit() {
 		this.subscribeToDataChanges();
@@ -36,27 +32,21 @@ export class AppComponent implements OnInit {
 	}
 
 	fetchSchedules() {
-		//
 		this.loadingIndicatorService.show();
-
-		this.scheduleApiService
-			.fetchSchedules()
+		this.sharedStateFacade
+			.loadSchedules()
 			.pipe(
-				// Catch any errors that occur during the HTTP request
 				catchError((error) => {
-					// Log the error
 					console.error('There was an error!', error);
-					// Hide loading indicator if an error occurs
-					this.loadingIndicatorService.hide();
-					// Re-throw the error to propagate it to the subscriber
 					return throwError(() => new Error(error));
 				}),
-				// Hide loading indicator regardless of success or error
-				finalize(() => this.loadingIndicatorService.hide())
+				finalize(() => {
+					this.loadingIndicatorService.hide();
+				})
 			)
 			.subscribe({
 				next: (data) => {
-					this.courses$.next(data);
+					this.schedules$.next(data);
 				},
 				error: (error) => {
 					// This block will be triggered only if an error occurs after catchError
@@ -66,16 +56,10 @@ export class AppComponent implements OnInit {
 	}
 
 	subscribeToDataChanges() {
-		this.courses$.subscribe({
+		this.schedules$.subscribe({
 			next: (data) => {
 				if (data !== null) {
-					data.sort(sortCoursesBySeqNo);
-					this.beginnerCourses$.next(
-						data.filter((course) => course.category === 'BEGINNER')
-					);
-					this.advancedCourses$.next(
-						data.filter((course) => course.category === 'ADVANCED')
-					);
+					this.loadingIndicatorService.hide(); // TODO: Handle inside fetchSchedules, but for some reason the observable is not finalizing
 					console.log('Data has changed:', data);
 				}
 			},

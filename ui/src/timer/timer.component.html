@@ -1,21 +1,23 @@
-<div class="timer">
+<div class="timer" [ngClass]="timerClassName">
     <svg width="100%" height="100%" viewBox="0 0 200 200" class="clock">
         <circle cx="100" cy="100" 
             r="90"
-            [attr.stroke-dasharray]="circumference"
-            [attr.stroke-dashoffset]="dashOffset"
             transform="rotate(-90 100 100)"
             stroke-width="6"
             stroke-linecap="round"
-            [ngClass]="percentage <= 0 ? 'done' : ''" />
+            [attr.stroke-dasharray]="circumference"
+            [attr.stroke-dashoffset]="dashOffset" />
     </svg>
     <ui-grid rowGap="m" [alignItems]="'center'" class="timer-control-wrapper">
         <ui-grid-item>
-            <time>{{ formatTime() }}</time>
+            <time>{{formattedDuration}}</time>
         </ui-grid-item>
         <ui-grid-item>
             <ui-grid-item>
-                <ui-icon class="timer-control" [iconName]="isPaused ? 'faPlay' : 'faPause'" (click)="toggleTimer()" />
+                <ui-icon 
+                    class="timer-control" 
+                    [iconName]="iconName"  
+                    (click)="toggleTimer()" />
             </ui-grid-item>
         </ui-grid-item>
     </ui-grid>
