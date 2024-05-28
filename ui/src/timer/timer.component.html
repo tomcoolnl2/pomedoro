@@ -1,12 +1,12 @@
-<div class="timer">
+<div class="timer" [ngClass]="timerClassName">
     <svg width="100%" height="100%" viewBox="0 0 200 200" class="clock">
         <circle cx="100" cy="100" 
             r="90"
-            [attr.stroke-dasharray]="circumference"
-            [attr.stroke-dashoffset]="dashOffset"
             transform="rotate(-90 100 100)"
             stroke-width="6"
-            stroke-linecap="round" />
+            stroke-linecap="round"
+            [attr.stroke-dasharray]="circumference"
+            [attr.stroke-dashoffset]="dashOffset" />
     </svg>
     <ui-grid rowGap="m" [alignItems]="'center'" class="timer-control-wrapper">
         <ui-grid-item>

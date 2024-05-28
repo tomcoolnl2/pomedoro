@@ -41,7 +41,6 @@ export class AppComponent implements OnInit {
 					return throwError(() => new Error(error));
 				}),
 				finalize(() => {
-					console.info('Finalizing...');
 					this.loadingIndicatorService.hide();
 				})
 			)

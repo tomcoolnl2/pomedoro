@@ -18,6 +18,9 @@ export class SharedStateFacade {
 
 	setTimerDuration(duration: number): void {
 		this.store.dispatch(SharedStateActions.setTimerDuration({ duration }));
+		this.store.dispatch(
+			SharedStateActions.setTimerRemaining({ remaining: duration })
+		);
 	}
 
 	startTimer(): void {

@@ -14,12 +14,20 @@
         @apply fill-none stroke-tomato-500;
     }
 
+    .timer.inactive .clock circle {
+        @apply stroke-tomato-800;
+    }
+
     .timer-control-wrapper {
         @apply relative;
     }
 
     .timer time {
         @apply text-6xl text-white font-bold;
+    }
+
+    .timer.inactive time {
+        @apply text-gray-400;
     }
 
     .timer .timer-control {
