@@ -6,6 +6,9 @@ export const sharedStateId = 'shared-state';
  * Represents the state shared across different components related to the Pomodoro timer.
  */
 export interface SharedState {
+	/** The total timer time. */
+	duration: number;
+
 	/** The current timer mode. */
 	currentTimerMode: TimerMode;
 
@@ -27,6 +30,7 @@ export interface SharedState {
 
 /** The initial state for the SharedState interface. */
 export const initialState: SharedState = {
+	duration: 0,
 	currentTimerMode: TimerMode.Pomodoro,
 	timerStatus: TimerStatus.Started,
 	progress: 0,

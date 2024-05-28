@@ -12,6 +12,15 @@ const selectSharedState = createFeatureSelector<SharedState>(sharedStateId);
  * Selects the current timer mode from the shared state.
  * @returns { TimerMode } The current timer mode.
  */
+export const selectTimerDuration = createSelector(
+	selectSharedState,
+	(state: SharedState) => state.duration
+);
+
+/**
+ * Selects the current timer mode from the shared state.
+ * @returns { TimerMode } The current timer mode.
+ */
 export const selectCurrentTimerMode = createSelector(
 	selectSharedState,
 	(state: SharedState) => state.currentTimerMode

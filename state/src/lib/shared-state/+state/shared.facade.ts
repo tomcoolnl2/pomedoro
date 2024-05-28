@@ -13,6 +13,11 @@ export class SharedStateFacade {
 	//
 	constructor(private store: Store<SharedState>) {}
 
+	setTimerDuration(duration: number): Observable<number> {
+		this.store.dispatch(SharedStateActions.setTimerDuration({ duration }));
+		return this.store.select(SharedStateSelectors.selectTimerDuration);
+	}
+
 	startTimer(): Observable<TimerStatus> {
 		this.store.dispatch(
 			SharedStateActions.setTimerStatus({

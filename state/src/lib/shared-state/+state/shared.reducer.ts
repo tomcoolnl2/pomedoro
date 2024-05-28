@@ -7,9 +7,9 @@ const reducer = createReducer(
 	on(SharedActions.resetTimer, () => ({
 		...initialState,
 	})),
-	on(SharedActions.setTimer, (state, { duration }) => ({
+	on(SharedActions.setTimerDuration, (state, { duration }) => ({
 		...state,
-		remainingTime: duration,
+		duration,
 	})),
 	on(SharedActions.setTimerMode, (state, { timerMode }) => ({
 		...state,

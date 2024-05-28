@@ -3,8 +3,8 @@ import { PomodoroSchedule, TimerMode, TimerStatus } from '@ng-pomedoro/model';
 
 export const resetTimer = createAction('[Pomodoro Timer] Reset Timer');
 
-export const setTimer = createAction(
-	'[Pomodoro Timer] Set Timer',
+export const setTimerDuration = createAction(
+	'[Pomodoro Timer] Set Timer Duration',
 	props<{ duration: number }>()
 );
 export const setTimerMode = createAction(

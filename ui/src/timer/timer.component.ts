@@ -1,8 +1,8 @@
+import { interval, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { TimerStatus } from '@ng-pomedoro/model';
 import { SharedStateFacade } from '@ng-pomedoro/state';
-import { interval, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
 	selector: 'ui-timer',
@@ -11,11 +11,11 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class TimerComponent implements OnInit, OnDestroy {
 	//
-	@Input() time!: number;
-	totalTime!: number;
+	@Input() time!: number; // TODO: PomodoroSchedule
+	duration!: number;
 	circumference = 2 * Math.PI * 90;
 	dashOffset = 0;
-	percentage = 100; // state.progress
+	progress = 100;
 	timerStatus!: TimerStatus;
 	TimerStatus = TimerStatus;
 
@@ -24,14 +24,17 @@ export class TimerComponent implements OnInit, OnDestroy {
 	constructor(private sharedStateFacade: SharedStateFacade) {}
 
 	ngOnInit(): void {
-		this.totalTime = this.time;
+		this.sharedStateFacade
+			.setTimerDuration(this.time)
+			.subscribe((duration) => {
+				this.duration = duration;
+				this.updateCircle();
+			});
 
 		this.sharedStateFacade.startTimer().subscribe((timerStatus) => {
 			this.timerStatus = timerStatus;
 			this.handleTimerStatusChange(timerStatus);
 		});
-
-		this.updateCircle();
 	}
 
 	handleTimerStatusChange(timerStatus: TimerStatus) {
@@ -72,8 +75,8 @@ export class TimerComponent implements OnInit, OnDestroy {
 	}
 
 	updateCircle(): void {
-		this.percentage = (this.time / this.totalTime) * 100;
-		this.dashOffset = this.circumference * (1 - this.time / this.totalTime);
+		this.progress = (this.time / this.duration) * 100;
+		this.dashOffset = this.circumference * (1 - this.time / this.duration);
 	}
 
 	formatTime(): string {
