@@ -32,7 +32,6 @@ export class TimerComponent implements OnInit, OnDestroy {
 			.selectTimerDuration()
 			.pipe(takeUntil(this.destroy$))
 			.subscribe((duration) => {
-				console.log('duration', duration);
 				this.formattedDuration = this.formatTime(duration);
 			});
 
@@ -75,10 +74,9 @@ export class TimerComponent implements OnInit, OnDestroy {
 	}
 
 	private updateCircle(remainingTime: number): void {
-		this.progress = (remainingTime / this.duration) * 100;
-		this.dashOffset =
-			this.circumference * (1 - remainingTime / this.duration);
-		console.log(this.dashOffset);
+		const delta = remainingTime / this.duration;
+		this.progress = delta * 100;
+		this.dashOffset = this.circumference * (1 - delta);
 	}
 
 	private setTimerClassName(status: TimerStatus): 'active' | 'inactive' {

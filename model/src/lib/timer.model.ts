@@ -1,7 +1,7 @@
 export enum TimerMode {
-	Pomodoro = 'Pomodoro',
-	Countdown = 'Countdown',
-	Custom = 'Custom',
+	Pomodoro,
+	Countdown,
+	Custom,
 }
 
 export enum TimerStatus {
