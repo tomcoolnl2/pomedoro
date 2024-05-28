@@ -1,13 +1,13 @@
 import { BehaviorSubject, catchError, finalize, throwError } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { Course } from '@ng-pomedoro/model';
+import { PomodoroSchedule } from '@ng-pomedoro/model';
 import {
 	LoadingIndicatorService,
 	NotificationsService,
 	NotificationTypeEnum,
 	ModalService,
 } from '@ng-pomedoro/ui';
-import { SchedulesFacade } from '@ng-pomedoro/state';
+import { SharedStateFacade } from '@ng-pomedoro/state';
 
 @Component({
 	selector: 'app-root',
@@ -17,16 +17,14 @@ export class AppComponent implements OnInit {
 	//
 	public readonly title = 'Pomedoro';
 
+	schedules$ = new BehaviorSubject<PomodoroSchedule[] | null>(null);
+
 	constructor(
-		private schedulesFacade: SchedulesFacade,
+		private sharedStateFacade: SharedStateFacade,
 		private loadingIndicatorService: LoadingIndicatorService,
 		private notificationsService: NotificationsService,
 		private modalService: ModalService
 	) {}
-
-	schedules$ = new BehaviorSubject<Course[] | null>(null);
-	beginnerCourses$ = new BehaviorSubject<Course[] | null>(null);
-	advancedCourses$ = new BehaviorSubject<Course[] | null>(null);
 
 	ngOnInit() {
 		this.subscribeToDataChanges();
@@ -35,7 +33,7 @@ export class AppComponent implements OnInit {
 
 	fetchSchedules() {
 		this.loadingIndicatorService.show();
-		this.schedulesFacade
+		this.sharedStateFacade
 			.loadSchedules()
 			.pipe(
 				catchError((error) => {
@@ -62,13 +60,7 @@ export class AppComponent implements OnInit {
 		this.schedules$.subscribe({
 			next: (data) => {
 				if (data !== null) {
-					this.loadingIndicatorService.hide();
-					this.beginnerCourses$.next(
-						data.filter((course) => course.category === 'BEGINNER')
-					);
-					this.advancedCourses$.next(
-						data.filter((course) => course.category === 'ADVANCED')
-					);
+					this.loadingIndicatorService.hide(); // TODO: Handle inside fetchSchedules, but for some reason the observable is not finalizing
 					console.log('Data has changed:', data);
 				}
 			},

@@ -15,7 +15,10 @@
         </ui-grid-item>
         <ui-grid-item>
             <ui-grid-item>
-                <ui-icon class="timer-control" [iconName]="isPaused ? 'faPlay' : 'faPause'" (click)="toggleTimer()" />
+                <ui-icon 
+                    class="timer-control" 
+                    [iconName]="timerStatus === TimerStatus.Paused ? 'faPlay' : 'faPause'"  
+                    (click)="toggleTimer()" />
             </ui-grid-item>
         </ui-grid-item>
     </ui-grid>

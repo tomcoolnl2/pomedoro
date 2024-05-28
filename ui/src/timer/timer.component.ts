@@ -1,4 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { TimerStatus } from '@ng-pomedoro/model';
+import { SharedStateFacade } from '@ng-pomedoro/state';
 import { interval, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -13,15 +15,35 @@ export class TimerComponent implements OnInit, OnDestroy {
 	totalTime!: number;
 	circumference = 2 * Math.PI * 90;
 	dashOffset = 0;
-	percentage = 100; // TODO still used?
-	isPaused = false;
+	percentage = 100; // state.progress
+	timerStatus!: TimerStatus;
+	TimerStatus = TimerStatus;
 
 	private destroy$ = new Subject<void>();
 
+	constructor(private sharedStateFacade: SharedStateFacade) {}
+
 	ngOnInit(): void {
 		this.totalTime = this.time;
-		this.startTimer();
+
+		this.sharedStateFacade.startTimer().subscribe((timerStatus) => {
+			this.timerStatus = timerStatus;
+			this.handleTimerStatusChange(timerStatus);
+		});
+
 		this.updateCircle();
+	}
+
+	handleTimerStatusChange(timerStatus: TimerStatus) {
+		switch (timerStatus) {
+			case TimerStatus.Started:
+			case TimerStatus.Running:
+				this.startTimer();
+				break;
+			case TimerStatus.Paused:
+				this.pauseTimer();
+				break;
+		}
 	}
 
 	startTimer() {
@@ -32,7 +54,7 @@ export class TimerComponent implements OnInit, OnDestroy {
 					this.time--;
 					this.updateCircle();
 				} else {
-					this.pauseTimer();
+					this.sharedStateFacade.pauseTimer();
 				}
 			});
 	}
@@ -42,11 +64,10 @@ export class TimerComponent implements OnInit, OnDestroy {
 	}
 
 	toggleTimer() {
-		this.isPaused = !this.isPaused;
-		if (this.isPaused) {
-			this.pauseTimer();
+		if (this.timerStatus === TimerStatus.Paused) {
+			this.sharedStateFacade.resumeTimer();
 		} else {
-			this.startTimer();
+			this.sharedStateFacade.pauseTimer();
 		}
 	}
 

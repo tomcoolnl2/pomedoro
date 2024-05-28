@@ -1,2 +1,2 @@
-export * from './lib/schedules-state/schedules-state.module';
-export * from './lib/schedules-state/+state/schedules.facade';
+export * from './lib/shared-state/shared-state.module';
+export * from './lib/shared-state/+state/shared.facade';

@@ -1,4 +1,3 @@
-export * from './lib/course.model';
-export * from './lib/lesson.model';
-export * from './lib/message.model';
+export * from './lib/timer.model';
+export * from './lib/schedule.model';
 export * from './lib/user.model';

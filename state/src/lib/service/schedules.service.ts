@@ -1,7 +1,7 @@
 import { Observable, map, shareReplay } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Course } from '@ng-pomedoro/model';
+import { PomodoroSchedule } from '@ng-pomedoro/model';
 
 @Injectable({
 	providedIn: 'root',
@@ -12,9 +12,9 @@ export class SchedulesService {
 
 	constructor(private http: HttpClient) {}
 
-	fetchSchedules(): Observable<Course[]> {
+	fetchSchedules(): Observable<PomodoroSchedule[]> {
 		return this.http
-			.get<{ payload: Course[] }>(`${this.baseUrl}/schedules`)
+			.get<{ payload: PomodoroSchedule[] }>(`${this.baseUrl}/schedules`)
 			.pipe(
 				map((res) => res.payload),
 				shareReplay()

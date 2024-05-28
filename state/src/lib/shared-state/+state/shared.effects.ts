@@ -1,21 +1,21 @@
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { SchedulesService } from './schedules.service';
-import * as SchedulesActions from './schedules.actions';
+import { SchedulesService } from '../../service/schedules.service';
+import * as SharedStateActions from './shared.actions';
 
 @Injectable()
-export class SchedulesEffects {
-	loadTickets$ = createEffect(() =>
+export class SharedStateEffects {
+	loadSchedules$ = createEffect(() =>
 		this.actions$.pipe(
-			ofType(SchedulesActions.loadSchedules),
+			ofType(SharedStateActions.loadSchedules),
 			mergeMap(() =>
 				this.schedulesService.fetchSchedules().pipe(
 					map((schedules) =>
-						SchedulesActions.loadSchedulesSuccess({ schedules })
+						SharedStateActions.loadSchedulesSuccess({ schedules })
 					),
 					catchError((error) =>
-						of(SchedulesActions.loadSchedulesFailure({ error }))
+						of(SharedStateActions.loadSchedulesFailure({ error }))
 					)
 				)
 			)
