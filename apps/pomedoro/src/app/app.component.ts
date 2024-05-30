@@ -4,6 +4,7 @@ import {
 	LoadingIndicatorService,
 	NotificationsService,
 	NotificationType,
+	Notification,
 	ModalService,
 } from '@ng-pomedoro/ui';
 import { SharedStateFacade } from '@ng-pomedoro/state';
@@ -18,14 +19,8 @@ export class AppComponent implements OnInit {
 	public readonly title = 'Pomedoro';
 	private destroy$ = new Subject<void>();
 
-	duration = 0;
-	circumference = 2 * Math.PI * 90;
-	dashOffset = 0;
-	progress = 100;
-	timerStatus!: TimerStatus;
-	formattedDuration!: string;
-	iconName: 'faPlay' | 'faPause' = 'faPlay';
-	timerClassName: 'active' | 'inactive' = 'inactive';
+	public duration = 0;
+	public timerStatus!: TimerStatus;
 
 	constructor(
 		private sharedStateFacade: SharedStateFacade,
@@ -87,7 +82,7 @@ export class AppComponent implements OnInit {
 	};
 
 	triggerError = () => {
-		const notification = {
+		const notification: Notification = {
 			message: 'This is a ERROR message',
 			type: NotificationType.Error,
 			persistent: true,

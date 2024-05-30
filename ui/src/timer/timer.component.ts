@@ -1,5 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
+import { Component, OnInit, Input } from '@angular/core';
 import { TimerStatus } from '@ng-pomedoro/model';
 import { SharedStateFacade } from '@ng-pomedoro/state';
 
@@ -10,7 +9,7 @@ import { SharedStateFacade } from '@ng-pomedoro/state';
 })
 export class TimerComponent implements OnInit {
 	//
-	duration = 0;
+	@Input() duration = 0;
 	circumference = 2 * Math.PI * 90;
 	dashOffset = 0;
 	progress = 100;

@@ -16,7 +16,10 @@ import { TimerComponent } from './timer/timer.component';
 
 import { LoadingIndicatorService } from './loader/loading-indicator.service';
 import { NotificationsService } from './notifications/notifications.service';
-import { NotificationType } from './notifications/notifications.model';
+import {
+	Notification,
+	NotificationType,
+} from './notifications/notifications.model';
 import { ModalService } from './modal/modal.service';
 
 @NgModule({
@@ -53,5 +56,6 @@ export {
 	LoadingIndicatorService,
 	NotificationsService,
 	NotificationType,
+	Notification,
 	ModalService,
 };
