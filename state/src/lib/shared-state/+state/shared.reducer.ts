@@ -4,6 +4,17 @@ import * as SharedActions from './shared.actions';
 
 const reducer = createReducer(
 	initialSharedState,
+	on(
+		SharedActions.setInitialSettings,
+		(state, { timerMode, config, schedule, session, duration }) => ({
+			...state,
+			timerMode,
+			config,
+			schedule,
+			session,
+			duration,
+		})
+	),
 	on(SharedActions.setScheduleConfig, (state, { config }) => ({
 		...state,
 		config,
@@ -43,6 +54,10 @@ const reducer = createReducer(
 	on(SharedActions.loadSchedulesSuccess, (state, { scheduleConfig }) => ({
 		...state,
 		scheduleConfig,
+	})),
+	on(SharedActions.loadSchedulesFailure, (state, { error }) => ({
+		...state,
+		error,
 	}))
 );
 

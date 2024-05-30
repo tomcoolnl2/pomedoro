@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 import { TimerStatus } from '@ng-pomedoro/model';
 import { SharedStateFacade } from '@ng-pomedoro/state';
 
@@ -9,7 +8,7 @@ import { SharedStateFacade } from '@ng-pomedoro/state';
 	templateUrl: './timer.component.html',
 	styleUrls: ['./timer.component.css'],
 })
-export class TimerComponent implements OnInit, OnDestroy {
+export class TimerComponent implements OnInit {
 	//
 	duration = 0;
 	circumference = 2 * Math.PI * 90;
@@ -20,51 +19,28 @@ export class TimerComponent implements OnInit, OnDestroy {
 	iconName: 'faPlay' | 'faPause' = 'faPlay';
 	timerClassName: 'active' | 'inactive' = 'inactive';
 
-	private destroy$ = new Subject<void>();
-
 	constructor(private sharedStateFacade: SharedStateFacade) {}
 
 	ngOnInit(): void {
 		//
+		this.sharedStateFacade.selectTimerDuration().subscribe((duration) => {
+			this.formattedDuration = this.formatTime(duration);
+		});
 
-		// this.sharedStateFacade
-		// 	.selectTimerDuration()
-		// 	.pipe(takeUntil(this.destroy$))
-		// 	.subscribe((duration) => {
-		// 		this.formattedDuration = this.formatTime(duration);
-		// 	});
-
-		this.sharedStateFacade
-			.selectTimerDuration()
-			.pipe(takeUntil(this.destroy$))
-			.subscribe((duration) => {
-				console.log(duration);
-				this.duration = duration;
-				this.formattedDuration = this.formatTime(duration);
-			});
-
-		this.sharedStateFacade
-			.selectTimerStatus()
-			.pipe(takeUntil(this.destroy$))
-			.subscribe((status) => {
-				this.timerStatus = status;
-				this.timerClassName = this.setTimerClassName(status);
-			});
+		this.sharedStateFacade.selectTimerStatus().subscribe((status) => {
+			this.timerClassName = this.setTimerClassName(status);
+		});
 
 		this.sharedStateFacade
 			.selectRemainingTime()
-			.pipe(takeUntil(this.destroy$))
 			.subscribe((remainingTime) => {
 				this.updateCircle(remainingTime);
 				this.formattedDuration = this.formatTime(remainingTime);
 			});
 
-		this.sharedStateFacade
-			.isTimerActive()
-			.pipe(takeUntil(this.destroy$))
-			.subscribe((active) => {
-				this.iconName = active ? 'faPause' : 'faPlay';
-			});
+		this.sharedStateFacade.isTimerActive().subscribe((active) => {
+			this.iconName = active ? 'faPause' : 'faPlay';
+		});
 	}
 
 	toggleTimer() {
@@ -104,10 +80,5 @@ export class TimerComponent implements OnInit, OnDestroy {
 
 	private pad(value: number): string {
 		return value < 10 ? '0' + value : value.toString();
-	}
-
-	ngOnDestroy() {
-		this.destroy$.next();
-		this.destroy$.complete();
 	}
 }

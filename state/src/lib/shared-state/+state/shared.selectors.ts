@@ -61,3 +61,12 @@ export const selectSchedules = createSelector(
 	selectSharedState,
 	(state: SharedState) => state.scheduleConfig
 );
+
+/**
+ * Selects the any Error (or null) from the shared state.
+ * @returns { Map<ScheduleType, ScheduleConfig> } The map of schedules.
+ */
+export const selectError = createSelector(
+	selectSharedState,
+	(state: SharedState) => state.error
+);

@@ -29,6 +29,8 @@ export interface SharedState {
 	remainingTime: number;
 	/** An collection of available Pomodoro schedules. */
 	scheduleConfig: Map<ScheduleType, ScheduleConfig> | null;
+	/** Error | null */
+	error: Error | null;
 }
 
 /** The initial state for the SharedState interface. */
@@ -42,4 +44,5 @@ export const initialSharedState: SharedState = {
 	progress: 0,
 	remainingTime: 0,
 	scheduleConfig: null,
+	error: null,
 };

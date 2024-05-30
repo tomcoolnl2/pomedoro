@@ -16,7 +16,7 @@ import { TimerComponent } from './timer/timer.component';
 
 import { LoadingIndicatorService } from './loader/loading-indicator.service';
 import { NotificationsService } from './notifications/notifications.service';
-import { NotificationTypeEnum } from './notifications/notifications.model';
+import { NotificationType } from './notifications/notifications.model';
 import { ModalService } from './modal/modal.service';
 
 @NgModule({
@@ -52,6 +52,6 @@ export class UiModule {}
 export {
 	LoadingIndicatorService,
 	NotificationsService,
-	NotificationTypeEnum,
+	NotificationType,
 	ModalService,
 };

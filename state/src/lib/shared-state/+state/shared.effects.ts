@@ -23,9 +23,12 @@ export class SharedStateEffects {
 							scheduleConfig,
 						})
 					),
-					catchError((error) =>
-						of(SharedStateActions.loadSchedulesFailure({ error }))
-					)
+					catchError((error: Error) => {
+						console.log('error', error);
+						return of(
+							SharedStateActions.loadSchedulesFailure({ error })
+						);
+					})
 				)
 			)
 		)
@@ -37,17 +40,26 @@ export class SharedStateEffects {
 			ofType(SharedStateActions.loadSchedulesSuccess),
 			mergeMap(({ scheduleConfig }) => {
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-				const config = scheduleConfig.get(ScheduleType.Classic)!; // TODO: handle null
+				const config = scheduleConfig.get(ScheduleType.Classic)!;
+				if (!config) {
+					return of(SharedStateActions.setScheduleConfigFailure());
+				}
 				const schedule = config.sessions;
 				const session = schedule[0];
 				const duration = session.duration;
 				return [
-					SharedStateActions.setTimerMode({ timerMode }),
-					SharedStateActions.setScheduleConfig({ config }),
-					SharedStateActions.setSchedule({ schedule }),
-					SharedStateActions.setSession({ session }),
-					SharedStateActions.setTimerDuration({ duration }),
+					SharedStateActions.setInitialSettings({
+						timerMode,
+						config,
+						schedule,
+						session,
+						duration,
+					}),
 				];
+			}),
+			catchError((error: Error) => {
+				console.log('error', error);
+				return of(SharedStateActions.loadSchedulesFailure({ error }));
 			})
 		);
 	});

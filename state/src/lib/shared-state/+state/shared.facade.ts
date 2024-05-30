@@ -134,4 +134,8 @@ export class SharedStateFacade {
 	selectSchedules(): Observable<Map<string, ScheduleConfig> | null> {
 		return this.store.select(SharedStateSelectors.selectSchedules);
 	}
+
+	selectError(): Observable<Error | null> {
+		return this.store.select(SharedStateSelectors.selectError);
+	}
 }

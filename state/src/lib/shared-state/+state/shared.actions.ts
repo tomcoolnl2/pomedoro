@@ -7,45 +7,65 @@ import {
 	TimerStatus,
 } from '@ng-pomedoro/model';
 
+export const setInitialSettings = createAction(
+	'[Config] Set Initial Settings',
+	props<{
+		timerMode: TimerMode;
+		config: ScheduleConfig;
+		schedule: Session[];
+		session: Session;
+		duration: number;
+	}>()
+);
+
+export const setInitialSettingsFailure = createAction(
+	'[Config] Set Initial Settings Failure',
+	props<{ error: any }>()
+);
+
+export const setScheduleConfigFailure = createAction(
+	'[Config] Set Schedule Config Failure'
+);
+
 export const setScheduleConfig = createAction(
-	'[Pomodoro Config] Set Current Configuration',
+	'[Config] Set Current Configuration',
 	props<{ config: ScheduleConfig }>()
 );
 
 export const setSchedule = createAction(
-	'[Pomodoro Config] Set Current Schedule',
+	'[Config] Set Current Schedule',
 	props<{ schedule: Session[] }>()
 );
 
 export const setSession = createAction(
-	'[Pomodoro Config] Set Current Session',
+	'[Config] Set Current Session',
 	props<{ session: Session }>()
 );
 
-export const resetTimer = createAction('[Pomodoro Timer] Reset Timer');
+export const resetTimer = createAction('[Timer] Reset Timer');
 
 export const setTimerDuration = createAction(
-	'[Pomodoro Timer] Set Timer Duration',
+	'[Timer] Set Timer Duration',
 	props<{ duration: number }>()
 );
 
 export const setTimerMode = createAction(
-	'[Pomodoro Timer] Set Timer Mode',
+	'[Timer] Set Timer Mode',
 	props<{ timerMode: TimerMode }>()
 );
 
 export const setTimerStatus = createAction(
-	'[Pomodoro Timer] Set Timer Status',
+	'[Timer] Set Timer Status',
 	props<{ timerStatus: TimerStatus }>()
 );
 
 export const setTimerProgress = createAction(
-	'[Pomodoro Timer] Set Timer Progress',
+	'[Timer] Set Timer Progress',
 	props<{ progress: number }>()
 );
 
 export const setTimerRemaining = createAction(
-	'[Pomodoro Timer] Set Timer Remaining',
+	'[Timer] Set Timer Remaining',
 	props<{ remainingTime: number }>()
 );
 
@@ -58,5 +78,5 @@ export const loadSchedulesSuccess = createAction(
 
 export const loadSchedulesFailure = createAction(
 	'[Schedules] Load Schedules Failure',
-	props<{ error: any }>() //TODO: Define error type
+	props<{ error: Error }>()
 );
