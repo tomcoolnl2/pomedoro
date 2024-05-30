@@ -2,29 +2,22 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { timer, Subscription, BehaviorSubject, Observable } from 'rxjs';
 import { take, takeWhile, tap, withLatestFrom } from 'rxjs/operators';
+import { ScheduleConfig, TimerMode, TimerStatus } from '@ng-pomedoro/model';
+import { SharedState } from './shared.state';
 import * as SharedStateActions from './shared.actions';
 import * as SharedStateSelectors from './shared.selectors';
-import { PomodoroSchedule, TimerStatus } from '@ng-pomedoro/model';
-import { SharedState } from './shared.state';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class SharedStateFacade {
+	//
 	private timerSubscription: Subscription | null = null;
 	private timerActive = new BehaviorSubject<boolean>(false);
 
 	constructor(private store: Store<SharedState>) {}
 
-	setTimerDuration(duration: number): void {
-		this.store.dispatch(SharedStateActions.setTimerDuration({ duration }));
-		this.store.dispatch(
-			SharedStateActions.setTimerRemaining({ remaining: duration })
-		);
-	}
-
 	startTimer(): void {
-		// Set the initial remaining time if it's not already set
 		this.store
 			.select(SharedStateSelectors.selectRemainingTime)
 			.pipe(
@@ -39,7 +32,7 @@ export class SharedStateFacade {
 								tap((duration) => {
 									this.store.dispatch(
 										SharedStateActions.setTimerRemaining({
-											remaining: duration,
+											remainingTime: duration,
 										})
 									);
 								})
@@ -71,8 +64,11 @@ export class SharedStateFacade {
 					const progress = (remaining / duration) * 100;
 
 					this.store.dispatch(
-						SharedStateActions.setTimerRemaining({ remaining })
+						SharedStateActions.setTimerRemaining({
+							remainingTime: remaining,
+						})
 					);
+
 					this.store.dispatch(
 						SharedStateActions.setTimerProgress({ progress })
 					);
@@ -124,10 +120,18 @@ export class SharedStateFacade {
 		return this.store.select(SharedStateSelectors.selectProgress);
 	}
 
-	loadSchedules(): Observable<PomodoroSchedule[]> {
+	selectTimerMode(): Observable<TimerMode | null> {
+		return this.store.select(SharedStateSelectors.selectTimerMode);
+	}
+
+	loadSchedules(): Observable<Map<string, ScheduleConfig> | null> {
 		this.store.dispatch(SharedStateActions.loadSchedules());
 		return this.store
 			.select(SharedStateSelectors.selectSchedules)
 			.pipe(take(1));
+	}
+
+	selectSchedules(): Observable<Map<string, ScheduleConfig> | null> {
+		return this.store.select(SharedStateSelectors.selectSchedules);
 	}
 }

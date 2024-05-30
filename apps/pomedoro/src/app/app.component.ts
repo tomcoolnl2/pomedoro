@@ -1,6 +1,5 @@
-import { BehaviorSubject, catchError, finalize, throwError } from 'rxjs';
+import { catchError, finalize, throwError } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { PomodoroSchedule } from '@ng-pomedoro/model';
 import {
 	LoadingIndicatorService,
 	NotificationsService,
@@ -17,8 +16,6 @@ export class AppComponent implements OnInit {
 	//
 	public readonly title = 'Pomedoro';
 
-	schedules$ = new BehaviorSubject<PomodoroSchedule[] | null>(null);
-
 	constructor(
 		private sharedStateFacade: SharedStateFacade,
 		private loadingIndicatorService: LoadingIndicatorService,
@@ -27,7 +24,6 @@ export class AppComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this.subscribeToDataChanges();
 		this.fetchSchedules();
 	}
 
@@ -44,26 +40,7 @@ export class AppComponent implements OnInit {
 					this.loadingIndicatorService.hide();
 				})
 			)
-			.subscribe({
-				next: (data) => {
-					this.schedules$.next(data);
-				},
-				error: (error) => {
-					// This block will be triggered only if an error occurs after catchError
-					console.error('An error occurred after catchError!', error);
-				},
-			});
-	}
-
-	subscribeToDataChanges() {
-		this.schedules$.subscribe({
-			next: (data) => {
-				if (data !== null) {
-					this.loadingIndicatorService.hide(); // TODO: Handle inside fetchSchedules, but for some reason the observable is not finalizing
-					console.log('Data has changed:', data);
-				}
-			},
-		});
+			.subscribe();
 	}
 
 	handleOpenSettingsDialog = () => {

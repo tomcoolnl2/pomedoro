@@ -1,11 +1,24 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { SharedState, initialState } from './shared.state';
+import { SharedState, initialSharedState } from './shared.state';
 import * as SharedActions from './shared.actions';
 
 const reducer = createReducer(
-	initialState,
+	initialSharedState,
+	on(SharedActions.setScheduleConfig, (state, { config }) => ({
+		...state,
+		config,
+	})),
+	on(SharedActions.setSchedule, (state, { schedule }) => ({
+		...state,
+		schedule,
+	})),
+	on(SharedActions.setSession, (state, { session }) => ({
+		...state,
+		session,
+	})),
 	on(SharedActions.resetTimer, () => ({
-		...initialState,
+		// TODO: -> reset
+		...initialSharedState,
 	})),
 	on(SharedActions.setTimerDuration, (state, { duration }) => ({
 		...state,
@@ -13,7 +26,7 @@ const reducer = createReducer(
 	})),
 	on(SharedActions.setTimerMode, (state, { timerMode }) => ({
 		...state,
-		currentTimerMode: timerMode,
+		timerMode,
 	})),
 	on(SharedActions.setTimerStatus, (state, { timerStatus }) => ({
 		...state,
@@ -23,13 +36,13 @@ const reducer = createReducer(
 		...state,
 		progress,
 	})),
-	on(SharedActions.setTimerRemaining, (state, { remaining }) => ({
+	on(SharedActions.setTimerRemaining, (state, { remainingTime }) => ({
 		...state,
-		remainingTime: remaining,
+		remainingTime,
 	})),
-	on(SharedActions.loadSchedulesSuccess, (state, { schedules }) => ({
+	on(SharedActions.loadSchedulesSuccess, (state, { scheduleConfig }) => ({
 		...state,
-		schedules,
+		scheduleConfig,
 	}))
 );
 

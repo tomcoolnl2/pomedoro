@@ -11,7 +11,7 @@ import { SharedStateFacade } from '@ng-pomedoro/state';
 })
 export class TimerComponent implements OnInit, OnDestroy {
 	//
-	@Input() duration!: number;
+	duration = 0;
 	circumference = 2 * Math.PI * 90;
 	dashOffset = 0;
 	progress = 100;
@@ -26,12 +26,20 @@ export class TimerComponent implements OnInit, OnDestroy {
 
 	ngOnInit(): void {
 		//
-		this.sharedStateFacade.setTimerDuration(this.duration);
+
+		// this.sharedStateFacade
+		// 	.selectTimerDuration()
+		// 	.pipe(takeUntil(this.destroy$))
+		// 	.subscribe((duration) => {
+		// 		this.formattedDuration = this.formatTime(duration);
+		// 	});
 
 		this.sharedStateFacade
 			.selectTimerDuration()
 			.pipe(takeUntil(this.destroy$))
 			.subscribe((duration) => {
+				console.log(duration);
+				this.duration = duration;
 				this.formattedDuration = this.formatTime(duration);
 			});
 
@@ -91,7 +99,6 @@ export class TimerComponent implements OnInit, OnDestroy {
 	private formatTime(time: number): string {
 		const minutes = (time / 60) << 0;
 		const seconds = time % 60;
-		console.log(`${this.pad(minutes)}:${this.pad(seconds)}`);
 		return `${this.pad(minutes)}:${this.pad(seconds)}`;
 	}
 

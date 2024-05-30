@@ -21,9 +21,9 @@ export const selectTimerDuration = createSelector(
  * Selects the current timer mode from the shared state.
  * @returns { TimerMode } The current timer mode.
  */
-export const selectCurrentTimerMode = createSelector(
+export const selectTimerMode = createSelector(
 	selectSharedState,
-	(state: SharedState) => state.currentTimerMode
+	(state: SharedState) => state.timerMode
 );
 
 /**
@@ -55,12 +55,9 @@ export const selectProgress = createSelector(
 
 /**
  * Selects the schedules from the shared state.
- * @returns { PomodoroSchedule[] } The array of schedules.
+ * @returns { Map<ScheduleType, ScheduleConfig> } The map of schedules.
  */
 export const selectSchedules = createSelector(
 	selectSharedState,
-	(state: SharedState) => {
-		console.log('selectSchedules', state);
-		return state.schedules;
-	}
+	(state: SharedState) => state.scheduleConfig
 );
