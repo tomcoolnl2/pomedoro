@@ -39,8 +39,7 @@ export class SharedStateEffects {
 		return this.actions$.pipe(
 			ofType(SharedStateActions.loadSchedulesSuccess),
 			mergeMap(({ scheduleConfig }) => {
-				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-				const config = scheduleConfig.get(ScheduleType.Classic)!;
+				const config = scheduleConfig.get(ScheduleType.Classic);
 				if (!config) {
 					return of(SharedStateActions.setScheduleConfigFailure());
 				}

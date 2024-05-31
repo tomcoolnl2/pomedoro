@@ -17,8 +17,6 @@ export interface SharedState {
 	session: Session | null;
 	/** The number of sessions (Pomodoros). */
 	schedule: Session[] | null;
-	/** The total timer time. */
-	duration: number;
 	/** The current timer mode. */
 	timerMode: TimerMode | null;
 	/** The status of the timer (e.g., started, stopped, completed). */
@@ -38,7 +36,6 @@ export const initialSharedState: SharedState = {
 	config: null,
 	session: null,
 	schedule: null,
-	duration: 0, // TODO: replace with session.duration
 	timerMode: null,
 	timerStatus: TimerStatus.Initial,
 	progress: 0,

@@ -14,7 +14,7 @@ const selectSharedState = createFeatureSelector<SharedState>(sharedStateId);
  */
 export const selectTimerDuration = createSelector(
 	selectSharedState,
-	(state: SharedState) => state.duration
+	(state: SharedState) => state.session?.duration ?? 0
 );
 
 /**
