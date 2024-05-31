@@ -1,46 +1,17 @@
 <ui-grid [cols]=3 class="schedule-indicator">
     <ui-grid-item>
-        <input 
-            type="radio" 
-            id="{{ scheduleIndicatorEnum.POMODORO }}" 
-            name="schedule-indicator" 
-            [(ngModel)]="selectedSchedule" 
-            [value]="scheduleIndicatorEnum.POMODORO"
-            (change)="handleSelectedScheduleChange(scheduleIndicatorEnum.POMODORO)"
-        />
-        <label 
-            for="{{ scheduleIndicatorEnum.POMODORO }}"
-            [class.active]="selectedSchedule === scheduleIndicatorEnum.POMODORO">
+        <span [class.active]="sessionType === sessionTypeEnum.Pomodoro">
             Pomodoro
-        </label>
+        </span>
     </ui-grid-item>
     <ui-grid-item>
-        <input 
-            type="radio" 
-            id="{{ scheduleIndicatorEnum.SHORT_BREAK }}" 
-            name="schedule-indicator" 
-            [(ngModel)]="selectedSchedule" 
-            [value]="scheduleIndicatorEnum.SHORT_BREAK"
-            (change)="handleSelectedScheduleChange(scheduleIndicatorEnum.SHORT_BREAK)"
-        />
-        <label 
-            for="{{ scheduleIndicatorEnum.SHORT_BREAK }}"
-            [class.active]="selectedSchedule === scheduleIndicatorEnum.SHORT_BREAK">
+        <span [class.active]="sessionType === sessionTypeEnum.ShortBreak">
             Short Break
-        </label>
+        </span>
     </ui-grid-item>
     <ui-grid-item>
-        <input 
-            type="radio" 
-            id="{{ scheduleIndicatorEnum.LONG_BREAK }}" 
-            name="schedule-indicator" 
-            [(ngModel)]="selectedSchedule" 
-            [value]="scheduleIndicatorEnum.LONG_BREAK"
-            (change)="handleSelectedScheduleChange(scheduleIndicatorEnum.LONG_BREAK)">
-        <label 
-            for="{{ scheduleIndicatorEnum.LONG_BREAK }}"
-            [class.active]="selectedSchedule === scheduleIndicatorEnum.LONG_BREAK">
+        <span [class.active]="sessionType === sessionTypeEnum.LongBreak">
             Long Break
-        </label>
+        </span>
     </ui-grid-item>
 </ui-grid>

@@ -9,6 +9,32 @@ import { SharedState, sharedStateId } from './shared.state';
 const selectSharedState = createFeatureSelector<SharedState>(sharedStateId);
 
 /**
+ * Selects the schedules from the shared state.
+ * @returns { Map<ScheduleType, ScheduleConfig> } The map of schedules.
+ */
+export const selectConfig = createSelector(
+	selectSharedState,
+	(state: SharedState) => state.scheduleConfig
+);
+/**
+ * Selects the current session from the shared state.
+ * @returns { Session[] | null } The current session.
+ */
+export const selectSchedule = createSelector(
+	selectSharedState,
+	(state: SharedState) => state.schedule
+);
+
+/**
+ * Selects the current session from the shared state.
+ * @returns { Session | null } The current session.
+ */
+export const selectSession = createSelector(
+	selectSharedState,
+	(state: SharedState) => state.session
+);
+
+/**
  * Selects the current timer mode from the shared state.
  * @returns { TimerMode } The current timer mode.
  */
@@ -42,24 +68,6 @@ export const selectTimerStatus = createSelector(
 export const selectRemainingTime = createSelector(
 	selectSharedState,
 	(state: SharedState) => state.remainingTime
-);
-
-/**
- * Selects the progress from the shared state.
- * @returns { number } The progress of the timer.
- */
-export const selectProgress = createSelector(
-	selectSharedState,
-	(state: SharedState) => state.progress
-);
-
-/**
- * Selects the schedules from the shared state.
- * @returns { Map<ScheduleType, ScheduleConfig> } The map of schedules.
- */
-export const selectSchedules = createSelector(
-	selectSharedState,
-	(state: SharedState) => state.scheduleConfig
 );
 
 /**

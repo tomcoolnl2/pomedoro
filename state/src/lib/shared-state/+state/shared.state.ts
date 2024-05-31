@@ -21,8 +21,6 @@ export interface SharedState {
 	timerMode: TimerMode | null;
 	/** The status of the timer (e.g., started, stopped, completed). */
 	timerStatus: TimerStatus;
-	/** The progress of the current timer interval, as a percentage. */
-	progress: number;
 	/** The remaining time (in seconds) of the current timer interval. */
 	remainingTime: number;
 	/** An collection of available Pomodoro schedules. */
@@ -38,7 +36,6 @@ export const initialSharedState: SharedState = {
 	schedule: null,
 	timerMode: null,
 	timerStatus: TimerStatus.Initial,
-	progress: 0,
 	remainingTime: 0,
 	scheduleConfig: null,
 	error: null,

@@ -39,10 +39,6 @@ const reducer = createReducer(
 		...state,
 		timerStatus,
 	})),
-	on(SharedActions.setTimerProgress, (state, { progress }) => ({
-		...state,
-		progress,
-	})),
 	on(SharedActions.setTimerRemaining, (state, { remainingTime }) => ({
 		...state,
 		remainingTime,
@@ -51,7 +47,7 @@ const reducer = createReducer(
 		...state,
 		scheduleConfig,
 	})),
-	on(SharedActions.loadSchedulesFailure, (state, { error }) => ({
+	on(SharedActions.throwError, (state, { error }) => ({
 		...state,
 		error,
 	}))

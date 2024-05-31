@@ -8,31 +8,35 @@ import {
 
 function formatSchedule(config: ScheduleConfig): Session[] {
 	const sessions: Session[] = [];
+	let sessionIndex = 0;
 	for (let i = 0, { sequence } = config; i < sequence; i++) {
 		sessions.push({
 			type: SessionType.Pomodoro,
 			duration: config[SessionType.Pomodoro],
+			index: sessionIndex++,
 		});
 		if (i < sequence - 1) {
 			sessions.push({
 				type: SessionType.ShortBreak,
 				duration: config[SessionType.ShortBreak],
+				index: sessionIndex++,
 			});
 		}
 	}
 	sessions.push({
 		type: SessionType.LongBreak,
 		duration: config[SessionType.LongBreak],
+		index: sessionIndex++,
 	});
 	return sessions;
 }
 
 const classicPomodoro: ScheduleConfig = {
 	type: ScheduleType.Classic,
-	[SessionType.Pomodoro]: 20,
-	[SessionType.ShortBreak]: 10,
-	[SessionType.LongBreak]: 15,
-	sequence: 4,
+	[SessionType.Pomodoro]: 3,
+	[SessionType.ShortBreak]: 4,
+	[SessionType.LongBreak]: 5,
+	sequence: 2,
 	sessions: null,
 };
 

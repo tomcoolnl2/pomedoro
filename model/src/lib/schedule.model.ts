@@ -20,6 +20,7 @@ export interface ScheduleConfig {
 }
 
 export interface Session {
+	index: number;
 	type: SessionType;
 	duration: number;
 }

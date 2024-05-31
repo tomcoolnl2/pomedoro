@@ -8,7 +8,7 @@ import {
 	ModalService,
 } from '@ng-pomedoro/ui';
 import { SharedStateFacade } from '@ng-pomedoro/state';
-import { TimerStatus } from '@ng-pomedoro/model';
+import { SessionType, TimerStatus } from '@ng-pomedoro/model';
 
 @Component({
 	selector: 'app-root',
@@ -17,12 +17,12 @@ import { TimerStatus } from '@ng-pomedoro/model';
 export class AppComponent implements OnInit {
 	//
 	public readonly title = 'Pomedoro';
-	private destroy$ = new Subject<void>();
 
 	public duration!: number;
 	public remainingTime!: number;
 	public timerStatus!: TimerStatus;
 	public timerActive!: boolean;
+	public sessionType!: SessionType | null;
 
 	constructor(
 		private sharedStateFacade: SharedStateFacade,
@@ -44,12 +44,9 @@ export class AppComponent implements OnInit {
 			}
 		});
 
-		this.sharedStateFacade
-			.selectTimerDuration()
-			.pipe(takeUntil(this.destroy$))
-			.subscribe((duration) => {
-				this.duration = duration;
-			});
+		this.sharedStateFacade.selectTimerDuration().subscribe((duration) => {
+			this.duration = duration;
+		});
 
 		this.sharedStateFacade
 			.selectRemainingTime()
@@ -57,19 +54,17 @@ export class AppComponent implements OnInit {
 				this.remainingTime = remainingTime;
 			});
 
-		this.sharedStateFacade
-			.selectTimerStatus()
-			.pipe(takeUntil(this.destroy$))
-			.subscribe((status) => {
-				this.timerStatus = status;
-			});
+		this.sharedStateFacade.selectTimerStatus().subscribe((status) => {
+			this.timerStatus = status;
+		});
 
-		this.sharedStateFacade
-			.isTimerActive()
-			.pipe(takeUntil(this.destroy$))
-			.subscribe((active) => {
-				this.timerActive = active;
-			});
+		this.sharedStateFacade.isTimerActive().subscribe((active) => {
+			this.timerActive = active;
+		});
+
+		this.sharedStateFacade.selectSession().subscribe((session) => {
+			this.sessionType = session ? session.type : null;
+		});
 	}
 
 	private fetchSchedules() {

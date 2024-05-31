@@ -2,7 +2,12 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { timer, Subscription, BehaviorSubject, Observable } from 'rxjs';
 import { take, takeWhile, tap, withLatestFrom } from 'rxjs/operators';
-import { ScheduleConfig, TimerMode, TimerStatus } from '@ng-pomedoro/model';
+import {
+	ScheduleConfig,
+	Session,
+	TimerMode,
+	TimerStatus,
+} from '@ng-pomedoro/model';
 import { SharedState } from './shared.state';
 import * as SharedStateActions from './shared.actions';
 import * as SharedStateSelectors from './shared.selectors';
@@ -18,32 +23,6 @@ export class SharedStateFacade {
 	constructor(private store: Store<SharedState>) {}
 
 	startTimer(): void {
-		this.store
-			.select(SharedStateSelectors.selectRemainingTime)
-			.pipe(
-				take(1), // Take the current remaining time value
-				tap((remainingTime) => {
-					if (remainingTime === 0) {
-						// TODO: timer end dispatch should set the next session
-						// If remaining time is 0, set it to the initial duration
-						this.store
-							.select(SharedStateSelectors.selectTimerDuration)
-							.pipe(
-								take(1),
-								tap((duration) => {
-									this.store.dispatch(
-										SharedStateActions.setTimerRemaining({
-											remainingTime: duration,
-										})
-									);
-								})
-							)
-							.subscribe();
-					}
-				})
-			)
-			.subscribe();
-
 		// Start the timer
 		this.store.dispatch(
 			SharedStateActions.setTimerStatus({
@@ -68,10 +47,6 @@ export class SharedStateFacade {
 						SharedStateActions.setTimerRemaining({
 							remainingTime: remaining,
 						})
-					);
-
-					this.store.dispatch(
-						SharedStateActions.setTimerProgress({ progress })
 					);
 
 					if (remaining <= 0) {
@@ -106,6 +81,18 @@ export class SharedStateFacade {
 		return this.timerActive.asObservable();
 	}
 
+	selectScheduleConfig(): Observable<Map<string, ScheduleConfig> | null> {
+		return this.store.select(SharedStateSelectors.selectConfig);
+	}
+
+	selectSchedule(): Observable<Session[] | null> {
+		return this.store.select(SharedStateSelectors.selectSchedule);
+	}
+
+	selectSession(): Observable<Session | null> {
+		return this.store.select(SharedStateSelectors.selectSession);
+	}
+
 	selectTimerStatus(): Observable<TimerStatus> {
 		return this.store.select(SharedStateSelectors.selectTimerStatus);
 	}
@@ -118,10 +105,6 @@ export class SharedStateFacade {
 		return this.store.select(SharedStateSelectors.selectRemainingTime);
 	}
 
-	selectProgress(): Observable<number> {
-		return this.store.select(SharedStateSelectors.selectProgress);
-	}
-
 	selectTimerMode(): Observable<TimerMode | null> {
 		return this.store.select(SharedStateSelectors.selectTimerMode);
 	}
@@ -129,12 +112,8 @@ export class SharedStateFacade {
 	loadSchedules(): Observable<Map<string, ScheduleConfig> | null> {
 		this.store.dispatch(SharedStateActions.loadSchedules());
 		return this.store
-			.select(SharedStateSelectors.selectSchedules)
+			.select(SharedStateSelectors.selectConfig)
 			.pipe(take(1));
-	}
-
-	selectSchedules(): Observable<Map<string, ScheduleConfig> | null> {
-		return this.store.select(SharedStateSelectors.selectSchedules);
 	}
 
 	selectError(): Observable<Error | null> {

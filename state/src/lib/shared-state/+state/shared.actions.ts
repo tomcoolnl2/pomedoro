@@ -3,9 +3,12 @@ import {
 	ScheduleConfig,
 	ScheduleType,
 	Session,
+	SessionType,
 	TimerMode,
 	TimerStatus,
 } from '@ng-pomedoro/model';
+
+export const noop = createAction('[Noop] fn for testing');
 
 export const setInitialSettings = createAction(
 	'[Config] Set Initial Settings',
@@ -16,15 +19,6 @@ export const setInitialSettings = createAction(
 		session: Session;
 		remainingTime: number;
 	}>()
-);
-
-export const setInitialSettingsFailure = createAction(
-	'[Config] Set Initial Settings Failure',
-	props<{ error: any }>()
-);
-
-export const setScheduleConfigFailure = createAction(
-	'[Config] Set Schedule Config Failure'
 );
 
 export const setScheduleConfig = createAction(
@@ -41,6 +35,13 @@ export const setSession = createAction(
 	'[Config] Set Current Session',
 	props<{ session: Session }>()
 );
+
+export const setSessionType = createAction(
+	'[Config] Set Current Session',
+	props<{ sessionType: SessionType }>()
+);
+
+export const endSession = createAction('[Timer] End Session');
 
 export const resetTimer = createAction('[Timer] Reset Timer');
 
@@ -59,11 +60,6 @@ export const setTimerStatus = createAction(
 	props<{ timerStatus: TimerStatus }>()
 );
 
-export const setTimerProgress = createAction(
-	'[Timer] Set Timer Progress',
-	props<{ progress: number }>()
-);
-
 export const setTimerRemaining = createAction(
 	'[Timer] Set Timer Remaining',
 	props<{ remainingTime: number }>()
@@ -76,7 +72,7 @@ export const loadSchedulesSuccess = createAction(
 	props<{ scheduleConfig: Map<ScheduleType, ScheduleConfig> }>()
 );
 
-export const loadSchedulesFailure = createAction(
+export const throwError = createAction(
 	'[Schedules] Load Schedules Failure',
 	props<{ error: Error }>()
 );
