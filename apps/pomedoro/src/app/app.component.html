@@ -7,7 +7,11 @@
         <ui-schedule-indicator />
     </ui-grid-item>
     <ui-grid-item>
-        <ui-timer />
+        <ui-timer 
+            [duration]="duration" 
+            [remainingTime]="remainingTime" 
+            [timerStatus]="timerStatus" 
+            [timerActive]="timerActive" />
     </ui-grid-item>
     <ui-grid-item>
         <ui-icon [iconName]="'faGear'" [onClick]="handleOpenSettingsDialog" />

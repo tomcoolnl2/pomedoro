@@ -19,8 +19,10 @@ export class AppComponent implements OnInit {
 	public readonly title = 'Pomedoro';
 	private destroy$ = new Subject<void>();
 
-	public duration = 0;
+	public duration!: number;
+	public remainingTime!: number;
 	public timerStatus!: TimerStatus;
+	public timerActive!: boolean;
 
 	constructor(
 		private sharedStateFacade: SharedStateFacade,
@@ -29,7 +31,7 @@ export class AppComponent implements OnInit {
 		private modalService: ModalService
 	) {}
 
-	ngOnInit() {
+	public ngOnInit() {
 		//
 		this.fetchSchedules();
 
@@ -47,6 +49,13 @@ export class AppComponent implements OnInit {
 			.pipe(takeUntil(this.destroy$))
 			.subscribe((duration) => {
 				this.duration = duration;
+				this.remainingTime = duration;
+			});
+
+		this.sharedStateFacade
+			.selectRemainingTime()
+			.subscribe((remainingTime) => {
+				this.remainingTime = remainingTime;
 			});
 
 		this.sharedStateFacade
@@ -55,9 +64,16 @@ export class AppComponent implements OnInit {
 			.subscribe((status) => {
 				this.timerStatus = status;
 			});
+
+		this.sharedStateFacade
+			.isTimerActive()
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((active) => {
+				this.timerActive = active;
+			});
 	}
 
-	fetchSchedules() {
+	private fetchSchedules() {
 		this.loadingIndicatorService.show();
 		this.sharedStateFacade
 			.loadSchedules()
@@ -73,15 +89,15 @@ export class AppComponent implements OnInit {
 			.subscribe();
 	}
 
-	handleOpenSettingsDialog = () => {
+	public handleOpenSettingsDialog = () => {
 		this.modalService.open();
 	};
 
-	handleApplySettings = () => {
+	public handleApplySettings = () => {
 		this.modalService.close();
 	};
 
-	triggerError = () => {
+	public triggerError = () => {
 		const notification: Notification = {
 			message: 'This is a ERROR message',
 			type: NotificationType.Error,

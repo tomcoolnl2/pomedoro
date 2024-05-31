@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { TimerStatus } from '@ng-pomedoro/model';
 import { SharedStateFacade } from '@ng-pomedoro/state';
 
@@ -7,42 +7,27 @@ import { SharedStateFacade } from '@ng-pomedoro/state';
 	templateUrl: './timer.component.html',
 	styleUrls: ['./timer.component.css'],
 })
-export class TimerComponent implements OnInit {
+export class TimerComponent implements OnChanges {
 	//
-	@Input() duration = 0;
-	circumference = 2 * Math.PI * 90;
-	dashOffset = 0;
-	progress = 100;
-	timerStatus!: TimerStatus;
-	formattedDuration!: string;
-	iconName: 'faPlay' | 'faPause' = 'faPlay';
-	timerClassName: 'active' | 'inactive' = 'inactive';
+	@Input() duration!: number;
+	@Input() remainingTime!: number;
+	@Input() timerStatus!: TimerStatus;
+	@Input() timerActive!: boolean;
+
+	public circumference = 2 * Math.PI * 90;
+	public dashOffset = 0;
+	public progress = 100;
 
 	constructor(private sharedStateFacade: SharedStateFacade) {}
 
-	ngOnInit(): void {
-		//
-		this.sharedStateFacade.selectTimerDuration().subscribe((duration) => {
-			this.formattedDuration = this.formatTime(duration);
-		});
-
-		this.sharedStateFacade.selectTimerStatus().subscribe((status) => {
-			this.timerClassName = this.setTimerClassName(status);
-		});
-
-		this.sharedStateFacade
-			.selectRemainingTime()
-			.subscribe((remainingTime) => {
-				this.updateCircle(remainingTime);
-				this.formattedDuration = this.formatTime(remainingTime);
-			});
-
-		this.sharedStateFacade.isTimerActive().subscribe((active) => {
-			this.iconName = active ? 'faPause' : 'faPlay';
-		});
+	public ngOnChanges(changes: SimpleChanges): void {
+		if (changes['remainingTime']) {
+			this.remainingTime = changes['remainingTime'].currentValue;
+			this.updateCircle();
+		}
 	}
 
-	toggleTimer() {
+	public toggleTimer() {
 		switch (this.timerStatus) {
 			case TimerStatus.Initial:
 				this.sharedStateFacade.startTimer();
@@ -56,13 +41,13 @@ export class TimerComponent implements OnInit {
 		}
 	}
 
-	private updateCircle(remainingTime: number): void {
-		const delta = remainingTime / this.duration;
+	private updateCircle(): void {
+		const delta = this.remainingTime / this.duration;
 		this.progress = delta * 100;
 		this.dashOffset = this.circumference * (1 - delta);
 	}
 
-	private setTimerClassName(status: TimerStatus): 'active' | 'inactive' {
+	public getTimerClassName(status: TimerStatus): string {
 		switch (status) {
 			case TimerStatus.Running:
 				return 'active';
@@ -71,7 +56,7 @@ export class TimerComponent implements OnInit {
 		}
 	}
 
-	private formatTime(time: number): string {
+	public formatTime(time: number): string {
 		const minutes = (time / 60) << 0;
 		const seconds = time % 60;
 		return `${this.pad(minutes)}:${this.pad(seconds)}`;

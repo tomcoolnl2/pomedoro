@@ -1,4 +1,4 @@
-<div class="timer" [ngClass]="timerClassName">
+<div class="timer" [ngClass]="getTimerClassName(timerStatus)">
     <svg width="100%" height="100%" viewBox="0 0 200 200" class="clock">
         <circle cx="100" cy="100" 
             r="90"
@@ -10,13 +10,13 @@
     </svg>
     <ui-grid rowGap="m" [alignItems]="'center'" class="timer-control-wrapper">
         <ui-grid-item>
-            <time>{{formattedDuration}}</time>
+            <time>{{formatTime(remainingTime)}}</time>
         </ui-grid-item>
         <ui-grid-item>
             <ui-grid-item>
                 <ui-icon 
                     class="timer-control" 
-                    [iconName]="iconName"  
+                    [iconName]="timerActive ? 'faPause' : 'faPlay'" 
                     (click)="toggleTimer()" />
             </ui-grid-item>
         </ui-grid-item>

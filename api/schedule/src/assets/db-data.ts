@@ -29,12 +29,21 @@ function formatSchedule(config: ScheduleConfig): Session[] {
 
 const classicPomodoro: ScheduleConfig = {
 	type: ScheduleType.Classic,
-	[SessionType.Pomodoro]: 25 * 60,
-	[SessionType.ShortBreak]: 5 * 60,
-	[SessionType.LongBreak]: 15 * 60,
+	[SessionType.Pomodoro]: 20,
+	[SessionType.ShortBreak]: 10,
+	[SessionType.LongBreak]: 15,
 	sequence: 4,
 	sessions: null,
 };
+
+// const classicPomodoro: ScheduleConfig = {
+// 	type: ScheduleType.Classic,
+// 	[SessionType.Pomodoro]: 25 * 60,
+// 	[SessionType.ShortBreak]: 5 * 60,
+// 	[SessionType.LongBreak]: 15 * 60,
+// 	sequence: 4,
+// 	sessions: null,
+// };
 
 const productivityBoost: ScheduleConfig = {
 	type: ScheduleType.Productive,

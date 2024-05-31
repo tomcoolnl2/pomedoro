@@ -31,10 +31,6 @@ const reducer = createReducer(
 		// TODO: -> reset
 		...initialSharedState,
 	})),
-	on(SharedActions.setTimerDuration, (state, { duration }) => ({
-		...state,
-		duration,
-	})),
 	on(SharedActions.setTimerMode, (state, { timerMode }) => ({
 		...state,
 		timerMode,
