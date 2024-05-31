@@ -49,7 +49,6 @@ export class AppComponent implements OnInit {
 			.pipe(takeUntil(this.destroy$))
 			.subscribe((duration) => {
 				this.duration = duration;
-				this.remainingTime = duration;
 			});
 
 		this.sharedStateFacade

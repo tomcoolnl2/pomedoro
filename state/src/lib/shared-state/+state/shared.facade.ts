@@ -24,6 +24,7 @@ export class SharedStateFacade {
 				take(1), // Take the current remaining time value
 				tap((remainingTime) => {
 					if (remainingTime === 0) {
+						// TODO: timer end dispatch should set the next session
 						// If remaining time is 0, set it to the initial duration
 						this.store
 							.select(SharedStateSelectors.selectTimerDuration)
@@ -75,6 +76,7 @@ export class SharedStateFacade {
 
 					if (remaining <= 0) {
 						this.pauseTimer(); // Automatically pause when time runs out
+						// dispatch timer end
 					}
 				})
 			)

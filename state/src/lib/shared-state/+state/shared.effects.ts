@@ -45,14 +45,14 @@ export class SharedStateEffects {
 				}
 				const schedule = config.sessions;
 				const session = schedule[0];
-				const duration = session.duration;
+				const remainingTime = session.duration;
 				return [
 					SharedStateActions.setInitialSettings({
 						timerMode,
 						config,
 						schedule,
 						session,
-						duration,
+						remainingTime,
 					}),
 				];
 			}),
@@ -62,4 +62,19 @@ export class SharedStateEffects {
 			})
 		);
 	});
+
+	// nextSeession$ = createEffect(() => {
+	// 	return this.actions$.pipe(
+	// 		//
+	// 		// setSession
+	// 		// setDuration
+
+	// 		ofType(SharedStateActions.loadSchedulesSuccess),
+	// 		mergeMap(({ scheduleConfig }) => {}),
+	// 		catchError((error: Error) => {
+	// 			console.log('error', error);
+	// 			return of(SharedStateActions.loadSchedulesFailure({ error }));
+	// 		})
+	// 	);
+	// });
 }

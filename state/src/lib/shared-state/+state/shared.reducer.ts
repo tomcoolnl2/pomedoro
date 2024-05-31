@@ -6,13 +6,13 @@ const reducer = createReducer(
 	initialSharedState,
 	on(
 		SharedActions.setInitialSettings,
-		(state, { timerMode, config, schedule, session, duration }) => ({
+		(state, { timerMode, config, schedule, session, remainingTime }) => ({
 			...state,
 			timerMode,
 			config,
 			schedule,
 			session,
-			duration,
+			remainingTime,
 		})
 	),
 	on(SharedActions.setScheduleConfig, (state, { config }) => ({

@@ -14,20 +14,18 @@ export class TimerComponent implements OnChanges {
 	@Input() timerStatus!: TimerStatus;
 	@Input() timerActive!: boolean;
 
-	public circumference = 2 * Math.PI * 90;
+	readonly circumference = 2 * Math.PI * 90;
 	public dashOffset = 0;
-	public progress = 100;
 
 	constructor(private sharedStateFacade: SharedStateFacade) {}
 
 	public ngOnChanges(changes: SimpleChanges): void {
 		if (changes['remainingTime']) {
-			this.remainingTime = changes['remainingTime'].currentValue;
 			this.updateCircle();
 		}
 	}
 
-	public toggleTimer() {
+	public toggleTimer(): void {
 		switch (this.timerStatus) {
 			case TimerStatus.Initial:
 				this.sharedStateFacade.startTimer();
@@ -42,22 +40,16 @@ export class TimerComponent implements OnChanges {
 	}
 
 	private updateCircle(): void {
-		const delta = this.remainingTime / this.duration;
-		this.progress = delta * 100;
-		this.dashOffset = this.circumference * (1 - delta);
+		const ratio = this.remainingTime / this.duration;
+		this.dashOffset = this.circumference * (1 - ratio);
 	}
 
 	public getTimerClassName(status: TimerStatus): string {
-		switch (status) {
-			case TimerStatus.Running:
-				return 'active';
-			default:
-				return 'inactive';
-		}
+		return status === TimerStatus.Running ? 'active' : 'inactive';
 	}
 
 	public formatTime(time: number): string {
-		const minutes = (time / 60) << 0;
+		const minutes = Math.floor(time / 60);
 		const seconds = time % 60;
 		return `${this.pad(minutes)}:${this.pad(seconds)}`;
 	}

@@ -14,7 +14,7 @@ export const setInitialSettings = createAction(
 		config: ScheduleConfig;
 		schedule: Session[];
 		session: Session;
-		duration: number;
+		remainingTime: number;
 	}>()
 );
 
