@@ -1,16 +1,16 @@
-<ui-grid [cols]=3 class="schedule-indicator">
+<ui-grid [cols]=3 class="schedule-indicator" [ngClass]="activeClassName">
     <ui-grid-item>
-        <span [class.active]="sessionType === sessionTypeEnum.Pomodoro">
+        <span [ngClass]="activeItemIndex === 0 ? 'active' : ''">
             Pomodoro
         </span>
     </ui-grid-item>
     <ui-grid-item>
-        <span [class.active]="sessionType === sessionTypeEnum.ShortBreak">
+        <span [ngClass]="activeItemIndex === 1 ? 'active' : ''">
             Short Break
         </span>
     </ui-grid-item>
     <ui-grid-item>
-        <span [class.active]="sessionType === sessionTypeEnum.LongBreak">
+        <span [ngClass]="activeItemIndex === 2 ? 'active' : ''">
             Long Break
         </span>
     </ui-grid-item>

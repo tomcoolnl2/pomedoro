@@ -17,7 +17,7 @@ Run `npx nx run ui:storybook` to start a Storybook development server and explor
 
 ## Backend
 
-Run `npx nx serve api` to start the api as development server on `http://localhost:3000/api`.
+Run `npx nx serve schedule` to start the api as development server on `http://localhost:3000/api`.
 Visit `http://localhost:3000/docs` to see the Swagger Documentation.
 
 ## Build for production

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { SessionType } from '@ng-pomedoro/model';
 
 @Component({
@@ -6,11 +6,28 @@ import { SessionType } from '@ng-pomedoro/model';
 	templateUrl: './schedule-indicator.component.html',
 	styleUrl: './schedule-indicator.component.css',
 })
-export class ScheduleIndicatorComponent {
-	@Input() sessionType!: SessionType | null;
-	readonly sessionTypeEnum = SessionType;
+export class ScheduleIndicatorComponent implements OnChanges {
+	//
+	@Input() public sessionType!: SessionType | null;
+	public activeClassName = '';
+	public activeItemIndex = 0;
 
-	constructor() {
-		console.log(this.sessionType, this.sessionTypeEnum);
+	public ngOnChanges(changes: SimpleChanges): void {
+		if (changes['sessionType']) {
+			switch (this.sessionType) {
+				case SessionType.ShortBreak:
+					this.activeClassName = 'active-33';
+					this.activeItemIndex = 1;
+					break;
+				case SessionType.LongBreak:
+					this.activeClassName = 'active-66';
+					this.activeItemIndex = 2;
+					break;
+				default:
+					this.activeClassName = 'active-0';
+					this.activeItemIndex = 0;
+					break;
+			}
+		}
 	}
 }

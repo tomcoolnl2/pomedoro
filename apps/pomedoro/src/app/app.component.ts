@@ -1,10 +1,9 @@
-import { Subject, catchError, finalize, takeUntil, throwError } from 'rxjs';
+import { catchError, finalize, throwError } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import {
 	LoadingIndicatorService,
 	NotificationsService,
 	NotificationType,
-	Notification,
 	ModalService,
 } from '@ng-pomedoro/ui';
 import { SharedStateFacade } from '@ng-pomedoro/state';
@@ -48,11 +47,9 @@ export class AppComponent implements OnInit {
 			this.duration = duration;
 		});
 
-		this.sharedStateFacade
-			.selectRemainingTime()
-			.subscribe((remainingTime) => {
-				this.remainingTime = remainingTime;
-			});
+		this.sharedStateFacade.selectRemainingTime().subscribe((time) => {
+			this.remainingTime = time;
+		});
 
 		this.sharedStateFacade.selectTimerStatus().subscribe((status) => {
 			this.timerStatus = status;
@@ -92,11 +89,10 @@ export class AppComponent implements OnInit {
 	};
 
 	public triggerError = () => {
-		const notification: Notification = {
+		this.notificationsService.addNotification({
 			message: 'This is a ERROR message',
 			type: NotificationType.Error,
 			persistent: true,
-		};
-		this.notificationsService.addNotification(notification);
+		});
 	};
 }

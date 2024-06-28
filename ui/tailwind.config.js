@@ -37,6 +37,18 @@ module.exports = {
 					to: { opacity: 1 },
 				},
 			},
+            backgroundImage: {
+                'tomato-gradient': 'linear-gradient(to right, #ff6347 0%, #ff6347 75%, #c8290d 100%)',
+            },
+            backgroundPosition: {
+                'left-center': 'left center',
+                'right-center': 'right center',
+            },
+            transitionProperty: {
+                'bg-position': 'background-position',
+                'left': 'left',
+                'color': 'color',
+            }
         },
     },
     plugins: [],
