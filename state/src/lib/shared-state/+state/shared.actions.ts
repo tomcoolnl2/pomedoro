@@ -6,7 +6,7 @@ import {
 	SessionType,
 	TimerMode,
 	TimerStatus,
-} from '@ng-pomedoro/model';
+} from '@ng-pomodoro/model';
 
 export const noop = createAction('[Noop] fn for testing');
 

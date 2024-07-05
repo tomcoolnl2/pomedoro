@@ -7,7 +7,7 @@ import {
 	Session,
 	TimerMode,
 	TimerStatus,
-} from '@ng-pomedoro/model';
+} from '@ng-pomodoro/model';
 import { SharedState } from './shared.state';
 import * as SharedStateActions from './shared.actions';
 import * as SharedStateSelectors from './shared.selectors';

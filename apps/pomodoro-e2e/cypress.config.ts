@@ -7,10 +7,10 @@ export default defineConfig({
 		...nxE2EPreset(__filename, {
 			cypressDir: 'src',
 			webServerCommands: {
-				default: 'nx run pomedoro:serve:development',
-				production: 'nx run pomedoro:serve:production',
+				default: 'nx run pomodoro:serve:development',
+				production: 'nx run pomodoro:serve:production',
 			},
-			ciWebServerCommand: 'nx run pomedoro:serve-static',
+			ciWebServerCommand: 'nx run pomodoro:serve-static',
 		}),
 		baseUrl: 'http://localhost:4200',
 	},

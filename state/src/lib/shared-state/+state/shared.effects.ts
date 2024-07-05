@@ -1,7 +1,7 @@
 import { catchError, filter, map, mergeMap, of, withLatestFrom } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { ScheduleType, TimerMode } from '@ng-pomedoro/model';
+import { ScheduleType, TimerMode } from '@ng-pomodoro/model';
 import { SchedulesService } from '../../service/schedules.service';
 import { SharedStateFacade } from './shared.facade';
 import * as SharedStateActions from './shared.actions';

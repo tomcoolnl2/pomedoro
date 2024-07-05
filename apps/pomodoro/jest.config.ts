@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-	displayName: 'pomedoro',
+	displayName: 'pomodoro',
 	preset: '../../jest.preset.js',
 	setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-	coverageDirectory: '../../coverage/apps/pomedoro',
+	coverageDirectory: '../../coverage/apps/pomodoro',
 	transform: {
 		'^.+\\.(ts|mjs|js|html)$': [
 			'jest-preset-angular',

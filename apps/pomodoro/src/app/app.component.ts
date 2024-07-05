@@ -5,9 +5,9 @@ import {
 	NotificationsService,
 	NotificationType,
 	ModalService,
-} from '@ng-pomedoro/ui';
-import { SharedStateFacade } from '@ng-pomedoro/state';
-import { SessionType, TimerStatus } from '@ng-pomedoro/model';
+} from '@ng-pomodoro/ui';
+import { SharedStateFacade } from '@ng-pomodoro/state';
+import { SessionType, TimerStatus } from '@ng-pomodoro/model';
 
 @Component({
 	selector: 'app-root',

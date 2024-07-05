@@ -5,12 +5,12 @@ import { CommonModule } from '@angular/common';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { SharedStateModule } from '@ng-pomedoro/state';
+import { SharedStateModule } from '@ng-pomodoro/state';
 import {
 	UiModule,
 	LoadingIndicatorService,
 	NotificationsService,
-} from '@ng-pomedoro/ui';
+} from '@ng-pomodoro/ui';
 import { AppComponent } from './app.component';
 
 @NgModule({

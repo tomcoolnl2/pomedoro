@@ -1,10 +1,10 @@
 {
-	"name": "@ng-pomedoro/source",
+	"name": "@ng-pomodoro/source",
 	"version": "0.0.0",
 	"license": "MIT",
 	"scripts": {
-		"test": "nx test pomedoro && nx test schedule && nx test ui",
-		"test:watch": "nx test pomedoro --watch",
+		"test": "nx test pomodoro && nx test schedule && nx test ui",
+		"test:watch": "nx test pomodoro --watch",
 		"format": "prettier --write './**/*.{js,jsx,ts,tsx,html,css,scss,json,md}'"
 	},
 	"private": true,

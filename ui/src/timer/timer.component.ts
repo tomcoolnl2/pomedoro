@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { TimerStatus } from '@ng-pomedoro/model';
-import { SharedStateFacade } from '@ng-pomedoro/state';
+import { TimerStatus } from '@ng-pomodoro/model';
+import { SharedStateFacade } from '@ng-pomodoro/state';
 
 @Component({
 	selector: 'ui-timer',

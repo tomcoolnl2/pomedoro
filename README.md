@@ -12,7 +12,7 @@ If you don't have the version described in the `.nvmrc`, run `nvm install` in th
 
 ## Frontend
 
-Run `npx nx serve pomedoro` to start the frontend development server on `http://localhost:4200/`.
+Run `npx nx serve pomodoro` to start the frontend development server on `http://localhost:4200/`.
 Run `npx nx run ui:storybook` to start a Storybook development server and explore all available components on `http://localhost:4400/`
 
 ## Backend
@@ -22,7 +22,7 @@ Visit `http://localhost:3000/docs` to see the Swagger Documentation.
 
 ## Build for production
 
-Run `npx nx build pomedoro` to build the application. The build artifacts are stored in the output directory `dist/`, ready to be deployed.
+Run `npx nx build pomodoro` to build the application. The build artifacts are stored in the output directory `dist/`, ready to be deployed.
 
 
 ## Test

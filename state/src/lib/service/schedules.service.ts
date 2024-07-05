@@ -1,7 +1,7 @@
 import { Observable, map, shareReplay } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ScheduleConfig, ScheduleType, jsonToMap } from '@ng-pomedoro/model';
+import { ScheduleConfig, ScheduleType, jsonToMap } from '@ng-pomodoro/model';
 
 @Injectable({
 	providedIn: 'root',

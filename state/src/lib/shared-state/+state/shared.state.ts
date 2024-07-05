@@ -4,7 +4,7 @@ import {
 	Session,
 	TimerMode,
 	TimerStatus,
-} from '@ng-pomedoro/model';
+} from '@ng-pomodoro/model';
 
 export const sharedStateId = 'shared-state';
 /**

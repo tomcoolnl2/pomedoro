@@ -4,7 +4,7 @@ import {
 	ScheduleType,
 	SessionType,
 	mapToJson,
-} from '@ng-pomedoro/model';
+} from '@ng-pomodoro/model';
 
 function formatSchedule(config: ScheduleConfig): Session[] {
 	const sessions: Session[] = [];
