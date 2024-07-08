@@ -9,7 +9,7 @@ import {
 function formatSchedule(config: ScheduleConfig): Session[] {
 	const sessions: Session[] = [];
 	let sessionIndex = 0;
-	for (let i = 0, { sequence } = config; i < sequence; i++) {
+	for (let i = 0, { sequence } = config; i < sequence; i += 1) {
 		sessions.push({
 			type: SessionType.Pomodoro,
 			duration: config[SessionType.Pomodoro],
@@ -26,11 +26,12 @@ function formatSchedule(config: ScheduleConfig): Session[] {
 	sessions.push({
 		type: SessionType.LongBreak,
 		duration: config[SessionType.LongBreak],
-		index: sessionIndex++,
+		index: (sessionIndex += 1),
 	});
 	return sessions;
 }
 
+// dummy data
 const classicPomodoro: ScheduleConfig = {
 	type: ScheduleType.Classic,
 	[SessionType.Pomodoro]: 3,

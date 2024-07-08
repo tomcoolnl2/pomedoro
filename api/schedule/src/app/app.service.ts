@@ -4,7 +4,7 @@ import scheduleConfig from '../assets/db-data';
 @Injectable()
 export class AppService {
 	//
-	getSchedules(): { payload: string } {
+	public getSchedules(): { payload: string } {
 		return { payload: scheduleConfig };
 	}
 }
