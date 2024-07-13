@@ -1,7 +1,7 @@
 {
 	"name": "schedule",
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
-	"sourceRoot": "api/schedule/src",
+	"sourceRoot": "api/schedules/src",
 	"projectType": "application",
 	"tags": [],
 	"targets": {
@@ -22,11 +22,9 @@
 		},
 		"test": {
 			"executor": "@nx/jest:jest",
-			"outputs": [
-				"{workspaceRoot}/coverage/{projectRoot}"
-			],
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
 			"options": {
-				"jestConfig": "api/schedule/jest.config.ts"
+				"jestConfig": "api/schedules/jest.config.ts"
 			}
 		}
 	}
