@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-	displayName: 'schedule',
+	displayName: 'common',
 	preset: '../../jest.preset.js',
 	testEnvironment: 'node',
 	transform: {
@@ -10,5 +10,5 @@ export default {
 		],
 	},
 	moduleFileExtensions: ['ts', 'js', 'html'],
-	coverageDirectory: '../../coverage/api/schedule',
+	coverageDirectory: '../../coverage/api/common',
 };

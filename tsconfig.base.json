@@ -15,6 +15,7 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
+			"@ng-pomodoro/common": ["api/common/src/index.ts"],
 			"@ng-pomodoro/model": ["model/src/index.ts"],
 			"@ng-pomodoro/state": ["state/src/index.ts"],
 			"@ng-pomodoro/ui": ["ui/src/index.ts"]
