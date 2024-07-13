@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-	displayName: 'scheduls',
+	displayName: 'schedules',
 	preset: '../../jest.preset.js',
 	testEnvironment: 'node',
 	transform: {
