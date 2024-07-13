@@ -7,8 +7,8 @@ export class SchedulesController {
 	//
 	constructor(private readonly schedulesService: SchedulesService) {}
 
-	@Get('schedules')
-	public getSchedules() {
-		return this.schedulesService.getSchedules();
-	}
+	// @Get('schedules')
+	// public getSchedules() {
+	// 	return this.schedulesService.getSchedules();
+	// }
 }

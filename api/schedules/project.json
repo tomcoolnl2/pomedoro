@@ -1,5 +1,5 @@
 {
-	"name": "schedule",
+	"name": "schedules",
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "api/schedules/src",
 	"projectType": "application",
@@ -9,20 +9,22 @@
 			"executor": "@nx/js:node",
 			"defaultConfiguration": "development",
 			"options": {
-				"buildTarget": "schedule:build"
+				"buildTarget": "schedules:build"
 			},
 			"configurations": {
 				"development": {
-					"buildTarget": "schedule:build:development"
+					"buildTarget": "schedules:build:development"
 				},
 				"production": {
-					"buildTarget": "schedule:build:production"
+					"buildTarget": "schedules:build:production"
 				}
 			}
 		},
 		"test": {
 			"executor": "@nx/jest:jest",
-			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"outputs": [
+				"{workspaceRoot}/coverage/{projectRoot}"
+			],
 			"options": {
 				"jestConfig": "api/schedules/jest.config.ts"
 			}
