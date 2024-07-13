@@ -1,7 +1,7 @@
 # Pomedoro
 
-- Angular frontend
-- NestJS backend
+- Angular frontends
+- NestJS backends
 
 ## Node
 
@@ -17,8 +17,10 @@ Run `npx nx run ui:storybook` to start a Storybook development server and explor
 
 ## Backend
 
-Run `npx nx serve schedule` to start the api as development server on `http://localhost:3000/api`.
+Run `npx nx serve schedules` to start the Schedules API as development server on `http://localhost:3000/api`.
 Visit `http://localhost:3000/docs` to see the Swagger Documentation.
+
+Run `npx nx serve reservations` to start the Reservations API as development server on `http://localhost:3001/api`.
 
 ## Build for production
 

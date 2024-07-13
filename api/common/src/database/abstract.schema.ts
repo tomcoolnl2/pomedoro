@@ -3,7 +3,8 @@ import { Document, Types } from 'mongoose';
 
 @Schema()
 export class AbstractDocument extends Document {
-	@Prop({ type: Types.ObjectId, default: new Types.ObjectId() })
+	//
+	@Prop({ type: Types.ObjectId })
 	override _id?: Types.ObjectId;
 }
 

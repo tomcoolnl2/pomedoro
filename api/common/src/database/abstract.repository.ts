@@ -1,4 +1,4 @@
-import { Model, FilterQuery, UpdateQuery } from 'mongoose';
+import { Model, FilterQuery, UpdateQuery, Types } from 'mongoose';
 import { InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { AbstractDocument } from './abstract.schema';
 
@@ -33,7 +33,7 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
 		try {
 			const createdDocument = new this.model({
 				...document,
-				_id: undefined, // Let Mongoose handle _id generation
+				_id: new Types.ObjectId(),
 			});
 
 			const savedDocument = await createdDocument.save();
