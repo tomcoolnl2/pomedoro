@@ -1,4 +1,5 @@
-import { INestApplication, Logger } from '@nestjs/common';
+import { Logger } from 'nestjs-pino';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import { ReservationsModule } from './app/reservations.module';
@@ -19,12 +20,14 @@ async function bootstrap() {
 	const port = configService.get<number>('RESERVATIONS_API_PORT');
 	const globalPrefix = 'api';
 
+	app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+	app.useLogger(app.get(Logger));
 	app.setGlobalPrefix(globalPrefix);
 	app.enableCors();
 	setupOpenApi(app);
 	await app.listen(port);
 
-	Logger.log(`🚀 Reservations API is running on: ${host}:${port}/${globalPrefix}`);
+	console.log(`🚀 Reservations API is running on: ${host}:${port}/${globalPrefix}`);
 }
 
 bootstrap();
