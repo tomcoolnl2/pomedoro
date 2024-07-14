@@ -4,12 +4,12 @@ import { IsDate, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateReservationDto {
 	//
-	@ApiProperty({ example: '2021-01-01T00:00:00.000Z' })
+	@ApiProperty({ example: '2021-01-01' })
 	@IsDate()
 	@Type(() => Date)
 	public startDate: Date;
 
-	@ApiProperty({ example: '2021-01-02T00:00:00.000Z' })
+	@ApiProperty({ example: '2021-01-02' })
 	@IsDate()
 	@Type(() => Date)
 	public endDate: Date;

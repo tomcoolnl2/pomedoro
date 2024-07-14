@@ -9,7 +9,7 @@ export class ReservationsService {
 	//
 	constructor(private readonly reservationsRepository: ReservationsRepository) {}
 
-	public create(createReservationDto: CreateReservationDto) {
+	public create(createReservationDto: CreateReservationDto): Promise<ReservationDocument> {
 		return this.reservationsRepository.create({
 			...createReservationDto,
 			timestamp: new Date(),
@@ -17,15 +17,15 @@ export class ReservationsService {
 		} as ReservationDocument);
 	}
 
-	public findAll() {
+	public findAll(): Promise<ReservationDocument[]> {
 		return this.reservationsRepository.find({});
 	}
 
-	public findOne(_id: string) {
+	public findOne(_id: string): Promise<ReservationDocument> {
 		return this.reservationsRepository.findOne({ _id });
 	}
 
-	public update(_id: string, updateReservationDto: UpdateReservationDto) {
+	public update(_id: string, updateReservationDto: UpdateReservationDto): Promise<ReservationDocument> {
 		return this.reservationsRepository.findOneAndUpdate(
 			{ _id },
 			{
@@ -34,7 +34,7 @@ export class ReservationsService {
 		);
 	}
 
-	public remove(_id: string) {
+	public remove(_id: string): Promise<ReservationDocument> {
 		return this.reservationsRepository.findOneAndDelete({ _id });
 	}
 }
