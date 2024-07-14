@@ -1,5 +1,5 @@
 import { Model, FilterQuery, UpdateQuery, Types } from 'mongoose';
-import { InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Logger, NotFoundException } from '@nestjs/common';
 import { AbstractDocument } from './abstract.schema';
 
 export abstract class AbstractRepository<TDocument extends AbstractDocument> {
@@ -20,13 +20,22 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
 
 		this.logger.error(errorMessage, error.stack);
 
-		throw new InternalServerErrorException(errorMessage);
+		throw error;
 	}
 
 	private handleEmptyResult(filterQuery?: FilterQuery<TDocument>): never {
 		const message = `No documents found${filterQuery ? ` with filterQuery: ${JSON.stringify(filterQuery)}` : ''}`;
 		this.logger.warn(message);
 		throw new NotFoundException(message);
+	}
+
+	private validateAndConvertId(filterQuery: FilterQuery<TDocument>): void {
+		if ('_id' in filterQuery) {
+			if (!Types.ObjectId.isValid(filterQuery._id)) {
+				throw new BadRequestException(`Invalid _id format: ${filterQuery._id}`);
+			}
+			filterQuery._id = new Types.ObjectId(filterQuery._id as string);
+		}
 	}
 
 	public async create(document: Omit<TDocument, '_id'>): Promise<TDocument> {
@@ -45,18 +54,22 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
 
 	public async findOne(filterQuery: FilterQuery<TDocument>): Promise<TDocument> {
 		try {
+			this.validateAndConvertId(filterQuery);
 			const document = await this.model.findOne(filterQuery).lean<TDocument>(true);
+			console.log('findOne', document);
 			if (!document) {
 				this.handleEmptyResult(filterQuery);
 			}
 			return document;
 		} catch (error) {
+			console.log('findOne error', error);
 			this.handleError(error as Error, 'findOne', filterQuery);
 		}
 	}
 
 	public async findOneAndUpdate(filterQuery: FilterQuery<TDocument>, update: UpdateQuery<TDocument>): Promise<TDocument> {
 		try {
+			this.validateAndConvertId(filterQuery);
 			const document = await this.model.findOneAndUpdate(filterQuery, update, { new: true }).lean<TDocument>(true);
 			if (!document) {
 				this.handleEmptyResult(filterQuery);
@@ -81,6 +94,7 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
 
 	public async findOneAndDelete(filterQuery: FilterQuery<TDocument>): Promise<TDocument> {
 		try {
+			this.validateAndConvertId(filterQuery);
 			const document = await this.model.findOneAndDelete(filterQuery).lean<TDocument>(true);
 			if (!document) {
 				this.handleEmptyResult(filterQuery);

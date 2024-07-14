@@ -6,7 +6,9 @@ import { ModelDefinition, MongooseModule } from '@nestjs/mongoose';
 	imports: [
 		MongooseModule.forRootAsync({
 			useFactory: (configService: ConfigService) => ({
-				uri: `mongodb://${configService.get<string>('DATABASE_HOST')}:${configService.get<number>('DATABASE_PORT')}/pomodoro`,
+				uri: `mongodb://${configService.get<string>('DATABASE_HOST')}:${configService.get<number>(
+					'DATABASE_PORT'
+				)}/pomodoro`,
 			}),
 			inject: [ConfigService],
 		}),
