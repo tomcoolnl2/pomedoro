@@ -1,0 +1,30 @@
+# Ignore typical files and directories
+node_modules
+dist
+.tmp
+.pnp
+.yarn/cache
+.yarn/unplugged
+yarn-error.log
+
+# Ignore Nx specific directories
+.nx
+nx.json
+
+# Ignore development and editor files
+.git
+.vscode
+.idea
+.DS_Store
+
+# Ignore test and coverage files if not needed in production image
+coverage
+*.spec.ts
+
+# Ignore npm specific files
+package-lock.json
+npm-debug.log
+
+# Ignore docker specific files
+Dockerfile
+docker-compose.yml

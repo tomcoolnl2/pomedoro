@@ -1,5 +1,5 @@
 {
-	"name": "@ng-pomodoro/source",
+	"name": "@pomodoro/source",
 	"version": "0.0.0",
 	"license": "MIT",
 	"scripts": {
@@ -73,7 +73,7 @@
 		"@nx/nest": "18.3.5",
 		"@nx/node": "18.3.5",
 		"@nx/storybook": "18.2.1",
-		"@nx/web": "18.2.1",
+		"@nx/web": "18.3.5",
 		"@nx/webpack": "18.3.5",
 		"@nx/workspace": "18.2.1",
 		"@schematics/angular": "~17.3.0",

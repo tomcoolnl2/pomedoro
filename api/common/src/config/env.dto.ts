@@ -3,10 +3,10 @@ import { IsString, IsNumber } from 'class-validator';
 export class EnvConfigDto {
 	//
 	@IsString()
-	DATABASE_HOST!: string;
+	POMODORO_APP_URL!: string;
 
 	@IsNumber()
-	DATABASE_PORT!: number;
+	POMODORO_APP_PORT!: number;
 
 	@IsString()
 	SCHEDULES_API_URL!: string;
@@ -19,4 +19,16 @@ export class EnvConfigDto {
 
 	@IsNumber()
 	RESERVATIONS_API_PORT!: number;
+
+	@IsString()
+	AUTH_API_URL!: string;
+
+	@IsNumber()
+	AUTH_API_PORT!: number;
+
+	@IsString()
+	DATABASE_HOST!: string;
+
+	@IsNumber()
+	DATABASE_PORT!: number;
 }

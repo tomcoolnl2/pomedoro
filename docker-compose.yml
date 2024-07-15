@@ -1,13 +1,76 @@
-version: '3.8'
-
 services:
+  # pomodoro:
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/pomodoro/Dockerfile
+  #   container_name: app-pomodoro
+  #   ports:
+  #     - '${POMODORO_APP_PORT}:${POMODORO_APP_PORT}'
+  #   depends_on:
+  #     - schedules
+  #     - reservations
+  #   environment:
+  #     - SCHEDULES_API_URL=api-schedules
+  #     - SCHEDULES_API_PORT=${SCHEDULES_API_PORT}
+  #     - RESERVATIONS_API_URL=api-reservations
+  #     - RESERVATIONS_API_PORT=${RESERVATIONS_API_PORT}
+  #   volumes:
+  #     - ./:/app
+  #     - /app/node_modules
+
+  # auth:
+  #   build:
+  #     context: .
+  #     dockerfile: ./api/auth/Dockerfile
+  #   container_name: api-auth
+  #   ports:
+  #     - '${AUTH_API_PORT}:${AUTH_API_PORT}'
+  #   depends_on:
+  #     - mongo
+  #   environment:
+  #     - DATABASE_HOST=mongodb
+  #     - DATABASE_PORT=${DATABASE_PORT}
+  #   volumes:
+  #     - ./:/app
+  #     - /app/node_modules
+
+  # schedules:
+  #   build:
+  #     context: .
+  #     dockerfile: ./api/schedules/Dockerfile
+  #   container_name: api-schedules
+  #   ports:
+  #     - '${SCHEDULES_API_PORT}:${SCHEDULES_API_PORT}'
+  #   depends_on:
+  #     - mongo
+  #   environment:
+  #     - DATABASE_HOST=mongodb
+  #     - DATABASE_PORT=${DATABASE_PORT}
+  #   volumes:
+  #     - ./:/app
+  #     - /app/node_modules
+
+  # reservations:
+  #   build:
+  #     context: .
+  #     dockerfile: ./api/reservations/Dockerfile
+  #   container_name: api-reservations
+  #   ports:
+  #     - '${RESERVATIONS_API_PORT}:${RESERVATIONS_API_PORT}'
+  #   depends_on:
+  #     - mongo
+  #   environment:
+  #     - DATABASE_HOST=mongodb
+  #     - DATABASE_PORT=${DATABASE_PORT}
+  #   volumes:
+  #     - ./:/app
+  #     - /app/node_modules
+
   mongo:
     image: mongo:latest
     container_name: mongodb
     ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
+      - '${DATABASE_PORT}:${DATABASE_PORT}'
 
 volumes:
   mongo-data:
