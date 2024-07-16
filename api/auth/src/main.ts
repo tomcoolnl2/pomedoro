@@ -1,3 +1,4 @@
+import cookieParser from 'cookie-parser';
 import { Logger } from 'nestjs-pino';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
@@ -6,7 +7,14 @@ import { ConfigService } from '@nestjs/config';
 import { AuthModule } from './app/auth.module';
 
 function setupOpenApi(app: INestApplication) {
-	const config = new DocumentBuilder().setTitle('Schedules API Documentation').setVersion('1.0').addTag('api').build();
+	//
+	const config = new DocumentBuilder()
+		.setTitle('Auth API Documentation')
+		// .setDescription('API description')
+		.setVersion('1.0')
+		.addBearerAuth()
+		.build();
+
 	const document = SwaggerModule.createDocument(app, config);
 	SwaggerModule.setup('docs', app, document);
 }
@@ -18,6 +26,7 @@ async function bootstrap() {
 	const port = configService.get<number>('AUTH_API_PORT');
 	const globalPrefix = 'api';
 
+	app.use(cookieParser());
 	app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 	app.useLogger(app.get(Logger));
 	app.useLogger(app.get(Logger));

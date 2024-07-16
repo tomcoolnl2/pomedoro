@@ -1,13 +1,26 @@
-import { Controller, Get } from '@nestjs/common';
-
+import { Response } from 'express';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Controller, Post, Res, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { LocalAuthGuard } from './guards/local-auth.guard';
+import { CurrentUser } from './decorators/current-user.decorator';
+import { UserDocument } from './users/models/user.schema';
 
-@Controller()
+@ApiTags('auth')
+@ApiBearerAuth()
+@Controller('auth')
 export class AuthController {
-	constructor(private readonly appService: AuthService) {}
+	//
+	constructor(private readonly authService: AuthService) {}
 
-	@Get()
-	getData() {
-		return this.appService.getData();
+	@UseGuards(LocalAuthGuard)
+	@Post('login')
+	@ApiOperation({ summary: 'User login' })
+	@ApiBody({ type: UserDocument })
+	@ApiResponse({ status: 200, description: 'Login successful', type: UserDocument })
+	@ApiResponse({ status: 401, description: 'Unauthorized' })
+	public async login(@CurrentUser() user: UserDocument, @Res({ passthrough: true }) response: Response) {
+		await this.authService.login(user, response);
+		response.send(user);
 	}
 }

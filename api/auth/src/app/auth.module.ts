@@ -1,12 +1,27 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, LoggerModule } from '@ng-pomodoro/common';
+import { JwtModule } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
+import { LoggerModule, ConfigModule } from '@ng-pomodoro/common';
+import { UsersModule } from './users/users.module';
+import { LocalStrategy } from './strategies/local.strategy';
+import { JwtStrategy } from './strategies/jwt.strategy';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { UsersModule } from './users/users.module';
 
 @Module({
-	imports: [ConfigModule, LoggerModule, UsersModule],
+	imports: [
+		LoggerModule,
+		ConfigModule,
+		JwtModule.registerAsync({
+			useFactory: async (configService: ConfigService) => ({
+				secret: configService.get<string>('JWT_SECRET'),
+				signOptions: { expiresIn: `${configService.get<number>('JWT_EXPIRATION')}s` },
+			}),
+			inject: [ConfigService],
+		}),
+		UsersModule,
+	],
 	controllers: [AuthController],
-	providers: [AuthService],
+	providers: [AuthService, LocalStrategy, JwtStrategy],
 })
 export class AuthModule {}

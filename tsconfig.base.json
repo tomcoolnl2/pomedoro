@@ -14,6 +14,7 @@
 		"skipLibCheck": true,
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
+		"resolveJsonModule": true,
 		"paths": {
 			"@ng-pomodoro/common": ["api/common/src/index.ts"],
 			"@ng-pomodoro/model": ["model/src/index.ts"],

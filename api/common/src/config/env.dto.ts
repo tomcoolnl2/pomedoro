@@ -3,6 +3,12 @@ import { IsString, IsNumber } from 'class-validator';
 export class EnvConfigDto {
 	//
 	@IsString()
+	JWT_SECRET!: string;
+
+	@IsNumber()
+	JWT_EXPIRATION!: number;
+
+	@IsString()
 	POMODORO_APP_URL!: string;
 
 	@IsNumber()
