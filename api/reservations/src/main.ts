@@ -1,3 +1,4 @@
+import cookieParser from 'cookie-parser';
 import { Logger } from 'nestjs-pino';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
@@ -21,6 +22,7 @@ async function bootstrap() {
 
 	app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 	app.useLogger(app.get(Logger));
+	app.use(cookieParser());
 	app.setGlobalPrefix(globalPrefix);
 	app.enableCors();
 	setupOpenApi(app);

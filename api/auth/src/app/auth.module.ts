@@ -1,13 +1,14 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { LoggerModule, ConfigModule } from '@ng-pomodoro/common';
+import { LoggerModule, ConfigModule } from '@pomodoro/common';
 import { UsersModule } from './users/users.module';
 import { LocalStrategy } from './strategies/local.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 
+@Global()
 @Module({
 	imports: [
 		LoggerModule,
@@ -22,6 +23,15 @@ import { AuthService } from './auth.service';
 		UsersModule,
 	],
 	controllers: [AuthController],
-	providers: [AuthService, LocalStrategy, JwtStrategy],
+	providers: [
+		AuthService,
+		LocalStrategy,
+		JwtStrategy,
+		{
+			provide: 'AUTH_INJECTION_TOKEN',
+			useValue: 'auth',
+		},
+	],
+	exports: ['AUTH_INJECTION_TOKEN'],
 })
 export class AuthModule {}

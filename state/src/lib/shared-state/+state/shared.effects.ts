@@ -1,7 +1,7 @@
 import { catchError, filter, map, mergeMap, of, withLatestFrom } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { ScheduleType, TimerMode } from '@ng-pomodoro/model';
+import { ScheduleType, TimerMode } from '@pomodoro/model';
 import { SchedulesService } from '../../service/schedules.service';
 import { SharedStateFacade } from './shared.facade';
 import * as SharedStateActions from './shared.actions';
@@ -70,10 +70,7 @@ export class SharedStateEffects {
 	nextSession$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(SharedStateActions.endSession),
-			withLatestFrom(
-				this.sharedStateFacade.selectSchedule(),
-				this.sharedStateFacade.selectSession()
-			),
+			withLatestFrom(this.sharedStateFacade.selectSchedule(), this.sharedStateFacade.selectSession()),
 			mergeMap(([_, schedule, prevSession]) => {
 				if (!schedule || !prevSession) {
 					return of(
@@ -84,11 +81,8 @@ export class SharedStateEffects {
 				}
 
 				const prevIndex = prevSession.index;
-				const nextIndex =
-					prevIndex + 1 >= schedule.length ? 0 : prevIndex + 1;
-				const nextSession = schedule.find(
-					(session) => session.index === nextIndex
-				);
+				const nextIndex = prevIndex + 1 >= schedule.length ? 0 : prevIndex + 1;
+				const nextSession = schedule.find((session) => session.index === nextIndex);
 
 				if (!nextSession) {
 					return of(

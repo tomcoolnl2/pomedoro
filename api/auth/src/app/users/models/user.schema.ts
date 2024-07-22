@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
-import { AbstractDocument } from '@ng-pomodoro/common';
+import { AbstractDocument } from '@pomodoro/common';
 import user from '../user.data.json';
 
 @Schema({ versionKey: false })

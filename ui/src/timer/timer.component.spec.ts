@@ -1,8 +1,8 @@
 import { of } from 'rxjs';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { TimerStatus } from '@ng-pomodoro/model';
-import { SharedStateFacade } from '@ng-pomodoro/state';
+import { TimerStatus } from '@pomodoro/model';
+import { SharedStateFacade } from '@pomodoro/state';
 import { GridComponent } from '../grid/grid.component';
 import { GridItemComponent } from '../grid/grid-item.component';
 import { IconComponent } from '../icon/icon.component';
@@ -26,16 +26,9 @@ describe('TimerComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [
-				GridComponent,
-				GridItemComponent,
-				IconComponent,
-				TimerComponent,
-			],
+			declarations: [GridComponent, GridItemComponent, IconComponent, TimerComponent],
 			imports: [FontAwesomeModule],
-			providers: [
-				{ provide: SharedStateFacade, useClass: MockSharedStateFacade },
-			],
+			providers: [{ provide: SharedStateFacade, useClass: MockSharedStateFacade }],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(TimerComponent);

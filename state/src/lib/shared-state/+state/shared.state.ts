@@ -1,10 +1,4 @@
-import {
-	ScheduleConfig,
-	ScheduleType,
-	Session,
-	TimerMode,
-	TimerStatus,
-} from '@ng-pomodoro/model';
+import { ScheduleConfig, ScheduleType, Session, TimerMode, TimerStatus } from '@pomodoro/model';
 
 export const sharedStateId = 'shared-state';
 /**

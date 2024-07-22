@@ -16,10 +16,10 @@
 		"baseUrl": ".",
 		"resolveJsonModule": true,
 		"paths": {
-			"@ng-pomodoro/common": ["api/common/src/index.ts"],
-			"@ng-pomodoro/model": ["model/src/index.ts"],
-			"@ng-pomodoro/state": ["state/src/index.ts"],
-			"@ng-pomodoro/ui": ["ui/src/index.ts"]
+			"@pomodoro/common": ["api/common/src/index.ts"],
+			"@pomodoro/model": ["model/src/index.ts"],
+			"@pomodoro/state": ["state/src/index.ts"],
+			"@pomodoro/ui": ["ui/src/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]

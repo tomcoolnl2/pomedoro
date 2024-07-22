@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { SessionType } from '@ng-pomodoro/model';
+import { SessionType } from '@pomodoro/model';
 
 @Component({
 	selector: 'ui-schedule-indicator',

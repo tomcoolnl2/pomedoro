@@ -1,5 +1,6 @@
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { CurrentUser, JwtAuthGuard } from '@pomodoro/common';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
 import { ReservationDocument } from './models/reservation.schema';
@@ -11,49 +12,57 @@ export class ReservationsController {
 	//
 	constructor(private readonly reservationsService: ReservationsService) {}
 
+	@UseGuards(JwtAuthGuard)
 	@Post()
 	@ApiOperation({ summary: 'Create reservation' })
 	@ApiResponse({ status: 201, description: 'Reservation created', type: ReservationDocument })
 	@ApiResponse({ status: 500, description: 'Internal server error' })
-	public create(@Body() createReservationDto: CreateReservationDto): Promise<ReservationDocument> {
-		return this.reservationsService.create(createReservationDto);
+	public async create(@Body() createReservationDto: CreateReservationDto, @CurrentUser() user): Promise<ReservationDocument> {
+		return this.reservationsService.create(createReservationDto, user._id);
 	}
 
+	@UseGuards(JwtAuthGuard)
 	@Get()
 	@ApiOperation({ summary: 'Get all reservations' })
 	@ApiResponse({ status: 200, description: 'All reservations', type: [ReservationDocument] })
 	@ApiResponse({ status: 500, description: 'Internal server error' })
-	public findAll(): Promise<ReservationDocument[]> {
+	public async findAll(): Promise<ReservationDocument[]> {
 		return this.reservationsService.findAll();
 	}
 
+	@UseGuards(JwtAuthGuard)
 	@Get(':id')
 	@ApiOperation({ summary: 'Get reservation by ID' })
 	@ApiResponse({ status: 200, description: 'Reservation by ID', type: ReservationDocument })
 	@ApiResponse({ status: 400, description: 'Bad request' })
 	@ApiResponse({ status: 404, description: 'Not found' })
 	@ApiResponse({ status: 500, description: 'Internal server error' })
-	public findOne(@Param('id') id: string): Promise<ReservationDocument> {
+	public async findOne(@Param('id') id: string): Promise<ReservationDocument> {
 		return this.reservationsService.findOne(id);
 	}
 
+	@UseGuards(JwtAuthGuard)
 	@Patch(':id')
 	@ApiOperation({ summary: 'Update reservation' })
 	@ApiResponse({ status: 200, description: 'Updated reservation', type: ReservationDocument })
 	@ApiResponse({ status: 400, description: 'Bad request' })
 	@ApiResponse({ status: 404, description: 'Not found' })
 	@ApiResponse({ status: 500, description: 'Internal server error' })
-	public update(@Param('id') id: string, @Body() updateReservationDto: UpdateReservationDto): Promise<ReservationDocument> {
+	public async update(
+		@Param('id') id: string,
+		@Body() updateReservationDto: UpdateReservationDto
+	): Promise<ReservationDocument> {
 		return this.reservationsService.update(id, updateReservationDto);
 	}
 
+	@UseGuards(JwtAuthGuard)
 	@Delete(':id')
 	@ApiOperation({ summary: 'Remove reservation' })
 	@ApiResponse({ status: 200, description: 'Removed reservation', type: ReservationDocument })
 	@ApiResponse({ status: 400, description: 'Bad request' })
 	@ApiResponse({ status: 404, description: 'Not found' })
 	@ApiResponse({ status: 500, description: 'Internal server error' })
-	public remove(@Param('id') id: string): Promise<ReservationDocument> {
+	public async remove(@Param('id') id: string): Promise<ReservationDocument> {
 		return this.reservationsService.remove(id);
 	}
 }

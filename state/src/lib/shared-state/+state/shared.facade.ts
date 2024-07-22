@@ -2,12 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { timer, Subscription, BehaviorSubject, Observable } from 'rxjs';
 import { take, takeWhile, tap, withLatestFrom } from 'rxjs/operators';
-import {
-	ScheduleConfig,
-	Session,
-	TimerMode,
-	TimerStatus,
-} from '@ng-pomodoro/model';
+import { ScheduleConfig, Session, TimerMode, TimerStatus } from '@pomodoro/model';
 import { SharedState } from './shared.state';
 import * as SharedStateActions from './shared.actions';
 import * as SharedStateSelectors from './shared.selectors';
@@ -111,9 +106,7 @@ export class SharedStateFacade {
 
 	loadSchedules(): Observable<Map<string, ScheduleConfig> | null> {
 		this.store.dispatch(SharedStateActions.loadSchedules());
-		return this.store
-			.select(SharedStateSelectors.selectConfig)
-			.pipe(take(1));
+		return this.store.select(SharedStateSelectors.selectConfig).pipe(take(1));
 	}
 
 	selectError(): Observable<Error | null> {

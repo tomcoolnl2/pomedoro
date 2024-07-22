@@ -1,13 +1,8 @@
 import { catchError, finalize, throwError } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import {
-	LoadingIndicatorService,
-	NotificationsService,
-	NotificationType,
-	ModalService,
-} from '@ng-pomodoro/ui';
-import { SharedStateFacade } from '@ng-pomodoro/state';
-import { SessionType, TimerStatus } from '@ng-pomodoro/model';
+import { LoadingIndicatorService, NotificationsService, NotificationType, ModalService } from '@pomodoro/ui';
+import { SharedStateFacade } from '@pomodoro/state';
+import { SessionType, TimerStatus } from '@pomodoro/model';
 
 @Component({
 	selector: 'app-root',

@@ -1,10 +1,9 @@
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
 import { UserDocument } from './models/user.schema';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto, UpdateUserDto } from './dto';
 import { UsersService } from './users.service';
-import { CurrentUser } from '../decorators/current-user.decorator';
+import { CurrentUser } from '../../../../common/src/decorators/current-user.decorator';
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 
 @ApiTags('users')
@@ -13,7 +12,7 @@ export class UsersController {
 	//
 	constructor(private readonly usersService: UsersService) {}
 
-	@Post()
+	@Post('user')
 	@ApiOperation({ summary: 'Create user' })
 	@ApiResponse({ status: 201, description: 'User created', type: UserDocument })
 	@ApiResponse({ status: 401, description: 'Unauthorized' })

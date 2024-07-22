@@ -10,14 +10,12 @@ export class UsersService {
 	constructor(private readonly usersRepository: UsersRepository) {}
 
 	public async create(createUserDto: CreateUserDto) {
-		await this.validateCreateUserDto(createUserDto);
-		return this.usersRepository.create({
-			...createUserDto,
-			password: bcrypt.hashSync(createUserDto.password, 10),
-		} as UserDocument);
+		await this.validateUser(createUserDto);
+		const password = await bcrypt.hash(createUserDto.password, 10);
+		return this.usersRepository.create({ ...createUserDto, password } as UserDocument);
 	}
 
-	private async validateCreateUserDto(createUserDto: CreateUserDto) {
+	private async validateUser(createUserDto: CreateUserDto) {
 		try {
 			await this.usersRepository.findOne({ email: createUserDto.email });
 		} catch (error) {
@@ -26,7 +24,7 @@ export class UsersService {
 		throw new UnprocessableEntityException('User with this email already exists.');
 	}
 
-	public async vefifyUser(email: string, password: string) {
+	public async vefifyUser(email: string, password: string): Promise<UserDocument> {
 		const user = await this.usersRepository.findOne({ email });
 		const passwordIsValid = bcrypt.compare(password, user.password);
 		if (user && passwordIsValid) {

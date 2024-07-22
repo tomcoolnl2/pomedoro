@@ -9,11 +9,11 @@ export class ReservationsService {
 	//
 	constructor(private readonly reservationsRepository: ReservationsRepository) {}
 
-	public create(createReservationDto: CreateReservationDto): Promise<ReservationDocument> {
+	public create(createReservationDto: CreateReservationDto, userId: string): Promise<ReservationDocument> {
 		return this.reservationsRepository.create({
 			...createReservationDto,
 			timestamp: new Date(),
-			userId: '123',
+			userId,
 		} as ReservationDocument);
 	}
 
